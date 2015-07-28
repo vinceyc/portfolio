@@ -6,3 +6,12 @@
 body {
 
 }
+
+#stage {
+    width: 768px;
+    height: 456px;
+    background: url("/images/narshe.png");
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
