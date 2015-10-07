@@ -9,11 +9,13 @@ var browserify  = require('browserify');
 var watchify    = require('watchify');
 var reactify    = require('reactify');
 var stringify   = require('stringify');
+var babelify   = require('babelify');
 
 gulp.task('watchify', function(){
 
   var bundler = watchify(
-    browserify()
+    browserify({debug : true})
+      .transform(babelify)
       .transform(stringify(['.hjs', '.html', '.tpl']))
       .transform(reactify)
       .require(require.resolve('../app/main.js'), { entry: true }),

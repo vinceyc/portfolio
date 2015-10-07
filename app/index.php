@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html>
-  <head>
+    <head>
+        <link href='https://fonts.googleapis.com/css?family=Expletus+Sans:400,700' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
 
-    <link href='http://fonts.googleapis.com/css?family=Old+Standard+TT:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="styles/css/style.css" css="">
-  </head>
-  <body>
-    <div id="App">
-    </div>
+        <link rel="stylesheet" href="styles/css/style.css" css="">
+        <title></title>
+
+    </head>
+
+    <body>
+
+        <div id="App"></div>
+
      <?php
 
       echo <<<EOHTML
@@ -18,5 +23,5 @@ EOHTML;
 
     ?>
 
-  </body>
+    </body>
 </html>

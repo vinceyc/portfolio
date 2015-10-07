@@ -1,0 +1,26 @@
+.project-link {
+    font-size: 0.666em;
+    color: transparent;
+    position: absolute;
+    bottom: 25%;
+    text-transform: uppercase;
+
+    &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: $white;
+        content: attr(data-hover);
+        -webkit-transition: max-width 1s;
+        -moz-transition: max-width 1s;
+        transition: max-width 1s;
+    }
+}
+
+.component-project {
+    color: $white;
+
+    .gallery-slide {
+
+    }
+}

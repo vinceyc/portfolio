@@ -1,0 +1,69 @@
+$time: 300ms;
+
+.letter-cell {
+    position: relative;
+    display: inline-block;
+}
+
+.component-letter {
+    position: relative;
+    margin: 0 auto;
+    display: inline-block;
+    overflow: visible;
+    font-family: 'Expletus Sans';
+
+    &:hover {
+        cursor: pointer;
+
+        .letter-shape {
+            stroke-width: 10px;
+            stroke-dashoffset: 0;
+            stroke-dasharray: 30;
+        }
+    }
+}
+
+.letter-shape {
+    stroke-dasharray: 0 10;
+    stroke-dashoffset: -475;
+    stroke-width: 8px;
+    fill: transparent;
+    stroke: $cyan;
+    border-bottom: 5px solid $black;
+    transition: stroke-width $time, stroke-dashoffset $time, stroke-dasharray $time;
+}
+
+.letter {
+    color: $cyan;
+    position: absolute;
+    top: 0;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    opacity: 1;
+    width: auto;
+    text-align: center;
+    margin: 0 auto;
+
+    &:hover {
+        outline: none;
+        color: $cyan;
+
+        &::before {
+            max-width: 500px;
+        }
+    }
+
+    &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        max-width: 0;
+        color: #333;
+        content: attr(data-hover);
+        -webkit-transition: max-width $time*2;
+        -moz-transition: max-width $time*2;
+        transition: max-width $time*2;
+    }
+}

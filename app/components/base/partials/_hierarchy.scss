@@ -1,0 +1,13 @@
+// H I E R A R C H Y
+.texture {
+    z-index: 3;
+}
+
+.component-header,
+.component-menu {
+    z-index: 2;
+}
+
+.component-home {
+    z-index: 1;
+}

@@ -1,0 +1,7 @@
+DB2 Marketing Poster
+$
+
+$
+A poster comparing the benefits of using IBM's DB2 over Oracle Databases. The aim was to use clear hierarchy to organize the content-heavy poster.
+$
+poster, print, 

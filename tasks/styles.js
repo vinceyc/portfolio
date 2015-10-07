@@ -2,6 +2,7 @@
 
 var gulp  = require('gulp');
 var sass  = require('gulp-sass');
+var autoprefixer = require('gulp-autoprefixer');
 var $     = require('gulp-load-plugins')();
 var browserSync = require('browser-sync');
 
@@ -20,12 +21,13 @@ var AUTOPREFIXER_BROWSERS = [
 ];
 
 gulp.task('sass', function () {
-  gulp.src('./app/styles/sass/*.scss')
+  gulp.src('./app/components/style.scss')
     .pipe(sass().on('error', sass.logError))
+    .pipe(autoprefixer({ browsers: ['last 2 versions'] }))
     .pipe(gulp.dest('./app/styles/css'));
   reload();
 });
 
 gulp.task('styles', function () {
-  gulp.watch('./app/styles/sass/*.scss', ['sass']);
+  gulp.watch('./app/components/**/*.scss', ['sass']);
 });

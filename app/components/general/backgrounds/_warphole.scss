@@ -1,0 +1,18 @@
+$ring-radius: 6em;
+
+.warp-ring {
+    width: $ring-radius;
+    height: $ring-radius;
+    border-radius: $ring-radius*2;
+    position: absolute;
+    border: 1px solid $cyan;
+}
+
+#warphole {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+}

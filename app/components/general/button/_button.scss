@@ -1,0 +1,68 @@
+$time: 600ms;
+
+.component-button {
+    position: relative;
+    margin: 0 auto;
+    display: inline-block;
+    overflow: visible;
+
+    &:hover {
+        cursor: pointer;
+
+        .button-shape {
+            stroke-width: 1px;
+            stroke-dashoffset: 0;
+            stroke-dasharray: 750;
+        }
+    }
+}
+
+.button-shape {
+    stroke-dasharray: 0 10;
+    stroke-dashoffset: -475;
+    stroke-width: 8px;
+    fill: transparent;
+    stroke: $cyan;
+    border-bottom: 5px solid $black;
+    transition: stroke-width $time, stroke-dashoffset $time, stroke-dasharray $time;
+}
+.text-button {
+    color: $white;
+    position: absolute;
+    top: 0;
+    text-decoration: none;
+    overflow: hidden;
+    opacity: 1;
+    width: 90%;
+    margin: 0 5%;
+
+    &:hover {
+        outline: none;
+        color: #888;
+
+        &::before {
+            max-width: 500px;
+        }
+    }
+
+    &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        max-width: 0;
+        color: $cyan;
+        content: attr(data-hover);
+        -webkit-transition: max-width $time*2;
+        -moz-transition: max-width $time*2;
+        transition: max-width $time*2;
+
+    }
+}
+
+@media only screen and (-Webkit-min-device-pixel-ratio: 1.5),
+only screen and (-moz-min-device-pixel-ratio: 1.5),
+only screen and (-o-min-device-pixel-ratio: 3/2),
+only screen and (min-device-pixel-ratio: 1.5) {
+
+}

@@ -1,0 +1,148 @@
+// T Y P E S E T . C S S
+/* Small caps */
+
+/* Double quote (") marks */
+.pull-double{margin-left:-.38em}
+.push-double{margin-right:.38em}
+
+/* Single quote (') marks */
+.pull-single{margin-left:-.15em}
+.push-single{margin-right:.15em}
+
+/* Optical margin alignment for particular letters */
+.pull-T, .pull-V, .pull-W, .pull-Y {margin-left: -0.07em}
+.push-T, .push-V, .push-W, .push-Y {margin-right: 0.07em}
+
+.pull-O, .pull-C, .pull-o, .pull-c {margin-left: -0.04em}
+.push-O, .push-C, .push-o, .push-c {margin-right: 0.04em}
+
+.pull-A {margin-left: -0.03em}
+.push-A {margin-right: 0.03em}
+
+// F O N T  F A M I L Y
+body {
+    font-family: 'Source Sans Pro', 'Helvetica' sans-serif;
+    font-weight: 400;
+    font-size: 15px
+}
+
+p, span, h1, h2, h3, h4, h5, h6 {
+    color: $white;
+}
+
+a {
+    color: $white;
+
+    &:hover {
+        color: $cyan;
+    }
+}
+
+h1, h2, h3, h5, h6 {
+    font-size: 2em;
+    font-weight: 400;
+    margin: 0;
+    line-height: 1.333;
+    letter-spacing: 1px;
+}
+
+p {
+    line-height: 1.5;
+    font-size: 0.8em;
+    margin: 1em 0;
+}
+
+h3 {
+    font-size: 1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: 2px;
+    border-bottom: 1px dotted $white;
+    padding-bottom: 0.5em;
+}
+
+ h4 {
+    font-size: 0.75em;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-style: normal;
+    letter-spacing: 1px;
+    border-bottom: 1px dotted $grey;
+    padding-bottom: 0.25em;
+    margin-bottom: 1em;
+}
+
+.text-button {
+    font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
+    font-size: 0.75em;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-style: normal;
+    letter-spacing: 1px;
+}
+
+.menu-button {
+    font-family: 'Expletus Sans', 'Source Sans Pro', 'Helvetica', sans-serif;
+}
+
+// F O N T  S I Z E
+
+/* ----------- iPhone 4 and 4S ----------- */
+
+@media
+only screen and (min-device-width: 0px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-device-width: 0px) and (max-device-width: 480px) and (min-resolution: 192dpi),
+only screen and (min-device-width: 0px) and (max-device-width: 480px) and (min-resolution: 2dppx) {
+    body { font-size: 15px }
+}
+
+/* ----------- iPhone 5 and 5S ----------- */
+
+@media
+only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-device-width: 320px) and (max-device-width: 568px) and (min-resolution: 192dpi),
+only screen and (min-device-width: 320px) and (max-device-width: 568px) and (min-resolution: 2dppx) {
+    body { font-size: 15px }
+}
+
+/* ----------- iPhone 6 ----------- */
+
+@media
+only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-device-width: 375px) and (max-device-width: 667px) and (min-resolution: 192dpi),
+only screen and (min-device-width: 375px) and (max-device-width: 667px) and (min-resolution: 2dppx) {
+    body { font-size: 18px }
+}
+
+/* ----------- iPhone 6+ ----------- */
+
+@media
+only screen and (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3),
+only screen and (min-device-width: 414px) and (max-device-width: 736px) and (min-resolution: 192dpi),
+only screen and (min-device-width: 414px) and (max-device-width: 736px) and (min-resolution: 3dppx) {
+    body { font-size: 18px }
+}
+
+/* ----------- iPad 1 and 2 ----------- */
+@media
+only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1),
+only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (min-resolution: 72dpi),
+only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (min-resolution: 1dppx) {
+    body { font-size: 20px}
+}
+
+/* ----------- iPad 3 and 4 ----------- */
+@media
+only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (min-resolution: 192dpi),
+only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (min-resolution: 2dppx) {
+    body { font-size: 20px}
+}
+
+@media
+only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 3),
+only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (min-resolution: 192dpi),
+only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (min-resolution: 3dppx) {
+    body { font-size: 20px}
+}

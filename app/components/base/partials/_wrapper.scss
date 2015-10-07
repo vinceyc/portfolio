@@ -1,0 +1,21 @@
+.wrapper {
+    background: $backgroundGradient;
+}
+
+.texture {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: url('./../../images/broken_noise.png');
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+@media only screen and (-Webkit-min-device-pixel-ratio: 1.5),
+only screen and (-moz-min-device-pixel-ratio: 1.5),
+only screen and (-o-min-device-pixel-ratio: 3/2),
+only screen and (min-device-pixel-ratio: 1.5) {
+    .icons {
+        background-image: url('./../../images/broken_noise_@2X.png');
+    }
+}

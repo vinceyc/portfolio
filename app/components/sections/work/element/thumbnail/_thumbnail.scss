@@ -1,0 +1,80 @@
+.project-item {
+
+    a {
+      font-size: 0.6em;
+      text-transform: uppercase;
+      color: $white;
+      letter-spacing: 1px;
+      margin-top: 1em;
+      transition: padding 0.4s ease-out;
+      -webkit-transition: padding 0.4s ease-out;
+    }
+    em {
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    .thumbnail-link {
+      border-top: 1px dotted $white;
+      display: block;
+      width: 90%;
+      margin: 1em 5%;
+      padding: 1em 0 1.5em;
+      transition: all 0.4s ease-out;
+      -webkit-transition: all 0.4s ease-out;
+
+      span {
+        opacity: 1;
+        transition: opacity 0.4s ease-out;
+        -webkit-transition: opacity 0.4s ease-out;
+      }
+    }
+
+    transition: background 0.4s ease-in;
+    -webkit-transition: background 0.4s ease-in;
+
+}
+
+.project-thumb {
+    width: 100%;
+    background-size: 90%;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    transition: all 0.4s ease-out;
+    -webkit-transition: all 0.4s ease-out;
+    filter: grayscale(100%) contrast(120%);
+}
+
+.thumbnail-wrapper {
+    overflow: hidden;
+}
+
+.thumbnail-cell {
+    float: left;
+
+    div {
+      width: 100%;
+      height: 100%;
+    }
+}
+
+.project-item.active,
+.project-item:hover {
+
+    cursor: pointer;
+    background: $workThumbnailGradient;
+
+    .thumbnail-link {
+        width: 90%;
+        margin: 1em 0%;
+        padding: 1em 5% 1.5em;
+        color: $cyan;
+        border-color: $cyan;
+      }
+
+      .project-thumb {
+          background-size: 100%;
+          filter: grayscale(0%) contrast(100%);
+      }
+
+}
