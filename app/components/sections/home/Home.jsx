@@ -13,7 +13,8 @@ import Snake from './../../general/backgrounds/Snake.jsx';
 // D A T A
 import homeData from './../../../data/home.js';
 
-const letterArray = range(homeData['title'].length);
+// const letterArray = range(homeData['title'].length);
+const letterArray = range(50);
 
 const HomeComponent = React.createClass({
 
@@ -28,7 +29,7 @@ const HomeComponent = React.createClass({
 
         return {
             mouse: [0, 0],
-            firstConfig: [60,10],
+            firstConfig: [120,10],
             slider: {dragged: null, num: 0},
             lastPressed: [0, 0],
         };
@@ -36,9 +37,6 @@ const HomeComponent = React.createClass({
     },
 
     componentDidMount() {
-
-        console.log(letterArray);
-        console.log(homeData['title']);
 
     },
 
@@ -56,8 +54,10 @@ const HomeComponent = React.createClass({
             baseGridWidth
         } = this.props;
 
-        const width = baseGridWidth*1/2;
-        const height = baseGridWidth*4/3*1/2;
+        const factor = 8;
+
+        const width = (baseGridWidth)/factor;
+        const height = (baseGridWidth*4/3)/factor;
 
         return (
             <section className='section component-home'>
@@ -67,10 +67,10 @@ const HomeComponent = React.createClass({
                         width: `${ width }rem`,
                         height: `${ height }rem`
                     };
-                    const stiffness = s0 + i * 30;
-                    const damping = d0 + i * 2;
+                    const stiffness = s0;
+                    const damping = d0;
                     const defaultLetterStyle = {
-                        x: spring(i * -500, [stiffness, damping]),
+                        x: spring(i * -50, [stiffness, damping]),
                         y: spring(0, [stiffness, damping]),
                     }
                     const letterStyle = {
@@ -79,31 +79,36 @@ const HomeComponent = React.createClass({
                     }
 
                     return (
+                    <div
+                        key={ i }
+                        style={ cellStyle }
+                        className='letter-cell'>
+
+                        <Motion
+                        defaultStyle={ defaultLetterStyle }
+                        style={ letterStyle }>
+                        {({x, y}) => {
+
+                            return (
+
                         <div
-                            key={ i }
-                            style={ cellStyle }
-                            className='letter-cell'>
+                          className="letter-wrapper"
+                          style={{
+                            transform: `translate3d(${x}px, ${y}px, 0)`,
+                            WebkitTransform: `translate3d(${x}px, ${y}px, 0)`,
+                          }}
+                          >
+                            <LetterComponent
+                                className='component-navigation'
+                                active={ false }
+                                width={ width }
+                                height={ height }
+                                text={ homeData['title'][i] }/>
+                            </div>
+                            );
 
-                            <Motion
-                            defaultStyle={ defaultLetterStyle }
-                            style={ letterStyle }>
-                            {({x, y}) => {
-
-                                return (
-                                    <LetterComponent
-                                        className='component-navigation'
-                                        active={ false }
-                                        width={ width }
-                                        height={ height }
-                                        text={ homeData['title'][i] }
-                                        style={{
-                                            transform: `translate3d(${x}px, ${y}px, 0)`,
-                                            WebkitTransform: `translate3d(${x}px, ${y}px, 0)`,
-                                        }}/>
-                                );
-
-                            }}
-                            </Motion>
+                        }}
+                        </Motion>
 
                         </div>
                     );

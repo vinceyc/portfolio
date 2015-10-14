@@ -53,17 +53,15 @@ const ContactComponent = React.createClass({
             <div
               className='contact-profile'
               style={{
-                width: `${ baseGridWidth }rem`,
+                width: `${ baseGridWidth - 1 }rem`,
+                marginRight: `${ 1 }rem`,
                 opacity: o/100,
                 transform: `translate3d( 0, ${ y }px, 0)`,
                 WebkitTransform: `translate3d( 0, ${ y }px, 0)`,
               }}>
 
-              <h4>Contact Information</h4>
+              <h4>Contact Info</h4>
 
-
-              <p>Thanks for visiting! I’m a young designer currently based in Toronto who graduated from OCAD University in 2012 with a Bachelor of Design. At the core of my work, unified and honest design are used to communicate ideas and create visual solutions. As an ideal, I believe that truly special design can take what people care about and make it relevant to others. I hope you see in my work that I strive to make this my focus.
-              </p>
 
               <a className='contact-link' href='mailto:vince.ys.chan@gmail.com'>Email</a>
               <a className='contact-link' href='https://ca.linkedin.com/pub/vincent-chan/43/276/5ab'>LinkedIn</a>
@@ -77,7 +75,8 @@ const ContactComponent = React.createClass({
             <div
               className='contact-form'
               style={{
-                width: `${ baseGridWidth*2 }rem`,
+                width: `${ baseGridWidth*2 - 1 }rem`,
+                marginRight: `${ 1 }rem`,
                 opacity: o/100,
                 transform: `translate3d( 0, ${ y }px, 0)`,
                 WebkitTransform: `translate3d( 0, ${ y }px, 0)`,

@@ -6,12 +6,12 @@ $teal: rgb(174,235,215);
 $cyan: rgb(71,252,234);
 $grey: rgb(122,120,115);
 $black: rgb(0,0,0);
-$elementGradient: linear-gradient( 135deg, hsla(0, 0%, 3%, 1), hsla(0, 0%, 0%, 1) );
-$backgroundBorderGradient: linear-gradient( 135deg, hsla(0, 0%, 8%, 1), hsla(0, 0%, 0%, 1) );
+$elementGradient: linear-gradient( 135deg, hsla(0, 0%, 0%, 1), hsla(0, 0%, 25%, 1) );
+$elementGradientreverse: linear-gradient( 135deg, hsla(0, 0%, 25%, 1), hsla(0, 0%, 0%, 1) );
+$backgroundBorderGradient: linear-gradient( 135deg, hsla(0, 0%, 20%, 1), hsla(0, 0%, 4%, 1) );
 $backgroundGradient: linear-gradient( 135deg, hsla(0, 0%, 0%, 1), hsla(0, 0%, 12%, 1) );
 $workThumbnailGradient: linear-gradient( 135deg, hsla(0, 0%, 12%, 1), hsla(0, 0%, 0%, 1) );
 $blackGradient: linear-gradient( 45deg, hsla(0, 0%, 0%, 1), hsla(0, 0%, 5%, 1) );
-$elementGradient: linear-gradient( 135deg, hsla(0, 0%, 3%, 1), hsla(0, 0%, 0%, 0) );
 
 // V A R I A B L E S
 $general-margin: 2em;

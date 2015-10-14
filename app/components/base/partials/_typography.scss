@@ -52,25 +52,33 @@ p {
     margin: 1em 0;
 }
 
-h3 {
-    font-size: 1em;
+
+h2, h3, h4 {
     text-transform: uppercase;
     font-weight: 700;
     font-style: normal;
     letter-spacing: 2px;
     border-bottom: 1px dotted $white;
-    padding-bottom: 0.5em;
+}
+
+h2 {
+    font-size: 1.25em;
+    padding-bottom: 1.25em;
+    margin-bottom: 1.25em;
+}
+
+h3 {
+    font-size: 1em;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
 }
 
  h4 {
-    font-size: 0.75em;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-style: normal;
+    border-color: $grey;
     letter-spacing: 1px;
-    border-bottom: 1px dotted $grey;
-    padding-bottom: 0.25em;
-    margin-bottom: 1em;
+    font-size: 0.75em;
+    padding-bottom: 0.75em;
+    margin-bottom: 0.75em;
 }
 
 .text-button {

@@ -39,11 +39,9 @@ const ButtonComponent = React.createClass({
 
   handleMouseDown() {
 
-      this.setActive();
+    this.setActive();
 
   },
-
-
 
   render() {
 

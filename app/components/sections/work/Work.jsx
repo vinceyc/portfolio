@@ -6,7 +6,6 @@ import range from 'lodash.range';
 // C O M P O N E N T S
 import ProjectComponent from './element/project/Project.jsx';
 import ThumbnailComponent from './element/thumbnail/Thumbnail.jsx';
-import ViewportComponent from './element/viewport/Viewport.jsx';
 
 // D A T A
 import workData from './../../../data/work.js';
@@ -29,7 +28,7 @@ const WorkComponent = React.createClass({
       firstConfig: [60,10],
       slider: {dragged: null, num: 0},
       lastPressed: [0, 0],
-      projectIndex: null,
+      projectIndex: 1,
     };
   },
 
@@ -68,35 +67,31 @@ const WorkComponent = React.createClass({
       baseGridWidth
     } = this.props;
 
-    let renderedSection;
-    let renderedGallery;
+    let renderedProject;
 
     if (projectIndex !== null) {
-      renderedSection = <ProjectComponent
-        idx={ projectIndex }
+      renderedProject = <ProjectComponent
+        projectIndex={ projectIndex }
         exitProject={ this.exitProject }
-        baseGridWidth={ baseGridWidth } />;
-
-      renderedGallery = <ViewportComponent
         view={ workData[projectIndex]['view'] }
-        width={ 240 } />;
+        baseGridWidth={ baseGridWidth } />;
     }
 
     const projectStyle = projectIndex == null
-      ? {
-          x: spring( 0 , [s0, d0]),
-          y: spring( -1200 , [s0, d0]),
-          o: spring( 0 , [20, d0]),
-        }
-      : {
-          x: spring( 0, [s0, d0]),
-          y: spring( 0, [s0, d0]),
-          o: spring( 100 ),
-        };
+    ? {
+        x: spring( -500 , [s0, d0]),
+        y: spring( -1200 , [s0, d0]),
+        o: spring( 0 , [20, d0]),
+      }
+    : {
+        x: spring( 0, [s0, d0]),
+        y: spring( 0, [s0, d0]),
+        o: spring( 100 ),
+      };
 
     return (
       <section className='section component-work'>
-          <Motion style={ projectStyle }>
+        <Motion style={ projectStyle }>
           {({x, y, o}) =>
             <div
               style={{
@@ -104,11 +99,11 @@ const WorkComponent = React.createClass({
                 transform: `translate3d(${x}px, ${y}px, 0)`,
                 WebkitTransform: `translate3d(${x}px, ${y}px, 0)`,
               }}>
-              { renderedSection }
-              { renderedGallery }
+              { renderedProject }
             </div>
           }
         </Motion>
+
         <div className={(projectIndex !== null) ? 'thumbnail-gallery project-view' : 'thumbnail-gallery'}>
           { projectArray.map((row, i) => {
               const cellStyle = {
