@@ -41,7 +41,7 @@ const HeaderComponent = React.createClass({
                   transform: `translate3d(${ value.l }px, 0, 0)`,
                   WebkitTransform: `translate3d(${ value.l }px, 0, 0)`,
                   w: `${ value.w }%`
-              }}>A front-end development & design showcase
+              }}>Wonderwall
             </h3>
           }
         </Motion>

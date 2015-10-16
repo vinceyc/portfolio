@@ -22,49 +22,10 @@
     position: absolute;
     transform: translateY(-50%);
     top: 50%;
-    width: 4em;
-    height: 4em;
-    border-radius: 0.5em;
-    background: $elementGradient;
-    box-sizing: border-box;
-    transition: box-shadow 0.07s ease-in;
-
-    &:before {
-        content: ' ';
-        background: $elementGradientreverse;
-        position: absolute;
-        width: 60%;
-        height: 60%;
-        padding: 10%;
-        margin: 10%;
-        border-radius: 0.25em;
-        font-size: 1.5em;
-        line-height: 1.6em;
-        transition: color 0.07s ease-in;
-    }
-
-    &:hover, &.pressed {
-        background: $elementGradientreverse;
-        cursor: pointer;
-        box-shadow: 0px 0px 5px 0px $cyan;
-
-        &:before {
-            background: $elementGradient;
-            line-height: 1.7em;
-            color: $cyan;
-        }
-    }
 }
 .arrow-prev {
     left: -3em;
-
-    &:before {
-        content: '←';
-    }
 }
 .arrow-next {
     right: -3em;
-    &:before {
-        content: '→';
-    }
 }

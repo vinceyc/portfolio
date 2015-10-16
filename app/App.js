@@ -3,6 +3,8 @@
 // I M P O R T
 import React from 'react';
 import { TransitionMotion, spring } from 'react-motion';
+import range from 'lodash.range';
+
 React.initializeTouchEvents(true);
 
 // C O M P O N E N T S
@@ -28,9 +30,35 @@ const Main = React.createClass({
 
     componentDidMount() {
 
+        window.addEventListener('keydown', this.handleOnKeyDown);
+        window.addEventListener('keyup', this.handleOnKeyUp);
+
+      },
+
+    handleOnKeyUp(e) {
+
+    },
+
+    handleOnKeyDown(e) {
+
+        if (e.keyCode === 87)
+        {
+          this.setState({ section: 'work', sections: ['work'] });
+        }
+        else if (e.keyCode === 83)
+        {
+          this.setState({ section: 'skills', sections: ['skills'] });
+        }
+        else if (e.keyCode === 67)
+        {
+          this.setState({ section: 'contact', sections: ['contact'] });
+        }
+
     },
 
     resize() {
+
+        console.log("[resize]");
 
         const width = window.innerWidth;
 
@@ -54,7 +82,6 @@ const Main = React.createClass({
         if (key !== this.state.section) {
 
             const {...newSection} = this.state.sections;
-            console.log("newSection = " + newSection);
 
             this.setState({
                 section: key,
@@ -111,7 +138,7 @@ const Main = React.createClass({
             <div id='wrapper' className='wrapper'>
 
                 <NavComponent
-                    className='component-navigation'
+                    className='component-navigation column'
                     changeSection={ this.changeSection }
                     baseGridWidth={ baseGridWidth }
                     isTransitioning={ isTransitioning }
@@ -122,7 +149,11 @@ const Main = React.createClass({
                     willEnter={this.willEnter}
                     willLeave={this.willLeave}>
                     {interpolatedStyles =>
-                        <div>
+                        <div
+                        style={{
+                          width: `${ (baseGridWidth * 3) + 3 }rem`,
+                          display: `inline-block`,
+                        }}>
                         {Object.keys(interpolatedStyles).map(key => {
                         const {text, ...style} = interpolatedStyles[key];
                         return (

@@ -6,6 +6,7 @@ import range from 'lodash.range';
 // C O M P O N E N T S
 import ProjectComponent from './element/project/Project.jsx';
 import ThumbnailComponent from './element/thumbnail/Thumbnail.jsx';
+import GalleryComponent from './element/gallery/Gallery.jsx';
 
 // D A T A
 import workData from './../../../data/work.js';
@@ -32,12 +33,32 @@ const WorkComponent = React.createClass({
     };
   },
 
+  componentDidMount() {
+
+        window.addEventListener('keydown', this.handleOnKeyDown);
+        window.addEventListener('keyup', this.handleOnKeyUp);
+
+      },
+
+  handleOnKeyDown(e) {
+
+      if (e.keyCode === 27)
+      {
+        this.setState({ projectIndex: null });
+      }
+
+  },
+
   handleTouchStart(i) {
+
       this.enterProject(i);
+
   },
 
   handleMouseDown(i) {
+
       this.enterProject(i);
+
   },
 
   enterProject(i) {
@@ -68,12 +89,17 @@ const WorkComponent = React.createClass({
     } = this.props;
 
     let renderedProject;
+    let renderedGallery;
 
     if (projectIndex !== null) {
       renderedProject = <ProjectComponent
         projectIndex={ projectIndex }
         exitProject={ this.exitProject }
         view={ workData[projectIndex]['view'] }
+        baseGridWidth={ baseGridWidth } />;
+
+      renderedGallery = <GalleryComponent
+        projectIndex={ projectIndex }
         baseGridWidth={ baseGridWidth } />;
     }
 
@@ -90,7 +116,11 @@ const WorkComponent = React.createClass({
       };
 
     return (
-      <section className='section component-work'>
+      <section
+        className='section component-work column'
+        style={{
+          width: `${ (baseGridWidth * 3) + 3 }rem`,
+        }}>
         <Motion style={ projectStyle }>
           {({x, y, o}) =>
             <div
@@ -100,6 +130,7 @@ const WorkComponent = React.createClass({
                 WebkitTransform: `translate3d(${x}px, ${y}px, 0)`,
               }}>
               { renderedProject }
+              { renderedGallery }
             </div>
           }
         </Motion>

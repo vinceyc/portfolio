@@ -57,9 +57,10 @@ const MenuitemComponent = React.createClass({
 
                 <ButtonComponent
                   text={ data['text'] }
-                  className={ section === data['ref']  ? 'active' : ''}
-                  width={ baseGridWidth }
-                  height={ 2 }
+                  className={ section === data['ref']  ? 'pressed' : ''}
+                  width={ baseGridWidth*2/3 }
+                  height={ 2.5 }
+                  keycode={ data['keycode'] }
                   isHeading={ true } />
 
             </h2>

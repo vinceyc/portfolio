@@ -6,7 +6,6 @@ import {Motion, spring} from 'react-motion';
 import PhoneComponent from './Phone.jsx';
 import TabletComponent from './Tablet.jsx';
 import DesktopComponent from './Desktop.jsx';
-import GalleryComponent from './../gallery/Gallery.jsx';
 
 // D A T A
 
@@ -16,7 +15,8 @@ const ViewportComponent = React.createClass({
 
       projectData: React.PropTypes.object,
       view: React.PropTypes.string,
-      baseGridWidth: React.PropTypes.number
+      baseGridWidth: React.PropTypes.number,
+      projectIndex: React.PropTypes.number
 
   },
 
@@ -25,7 +25,8 @@ const ViewportComponent = React.createClass({
     const {
       projectData,
       view,
-      baseGridWidth
+      baseGridWidth,
+      projectIndex
     } = this.props;
 
     const viewportDefaultStyle = {
@@ -52,29 +53,16 @@ const ViewportComponent = React.createClass({
 
     if ( view === 'phone' ) {
         renderedSection = <PhoneComponent width={viewportWidth} height={viewportHeight} />;
-        galleryWidth = baseGridWidth;
-        galleryHeight = baseGridWidth/663*1177;
     }
     if ( view === 'tablet' ) {
         renderedSection = <TabletComponent baseGridWidth={baseGridWidth} />;
-        galleryWidth = baseGridWidth;
-        galleryHeight = baseGridWidth/540*417;
     }
     if ( view === 'desktop' ) {
         renderedSection = <DesktopComponent baseGridWidth={baseGridWidth} />;
-        galleryWidth = baseGridWidth;
-        galleryHeight = baseGridWidth/540*417;
     }
 
       return (
         <section>
-
-           <GalleryComponent
-            id={ projectData['id'] }
-            gallery={ projectData['gallery'] }
-            width={ galleryWidth }
-            height={ galleryHeight }
-            view={ view } />
 
           <Motion style={ viewportStyle } defaultStyle={ viewportDefaultStyle }>
             {({x, y, o}) =>

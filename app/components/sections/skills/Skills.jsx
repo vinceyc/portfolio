@@ -92,7 +92,8 @@ const SkillsComponent = React.createClass({
         <div className='skills-gallery'>
           {gridNumber.map((row, i) => {
               const cellStyle = {
-                width: `${baseGridWidth}rem`,
+                width: `${ baseGridWidth - 1}rem`,
+                marginRight: `1rem`,
                 height: gridHeight,
               };
               const stiffness = s0 + i * 15;

@@ -40,21 +40,20 @@ const ProjectComponent = React.createClass({
         <section className='component-project'>
 
             <div
+                className='close-button'
                 onClick={ exitProject }
                 onTouchStart={ exitProject }>
 
               <ButtonComponent
-                text={ '<' }
-                width={ 2 }
+                text={ 'esc' }
+                width={ 3 }
                 height={ 2 }
+                keycode={ 0 }
                 isHeading={ false } />
 
             </div>
-            <h3>
-
-
-              {workData[projectIndex]['title']}
-            </h3>
+            <h2>{ workData[projectIndex]['title'] }</h2>
+            <h4>{ workData[projectIndex]['description'] }</h4>
 
           <div
             className='column'
@@ -85,6 +84,7 @@ const ProjectComponent = React.createClass({
               width: `${ baseGridWidth*3 }rem`,
             }}>
               <ViewportComponent
+                projectIndex={ projectIndex }
                 projectData={ workData[projectIndex] }
                 view={ workData[projectIndex]['view'] }
                 baseGridWidth={ baseGridWidth } />

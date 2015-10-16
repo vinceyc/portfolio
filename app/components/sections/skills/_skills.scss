@@ -1,22 +1,9 @@
 .component-skills {
 
 // S K I L L S
-.component-image {
-    .overlay {
-        background: -webkit-linear-gradient(-45deg, #EC65B7 0%,#05E0D8 100%);
-        background: linear-gradient(-45deg, #EC65B7 0%,#05E0D8 100%);
-    }
-
-    .image {
-        opacity: 0.85;
-        -webkit-transition: opacity 0.35s;
-        transition: opacity 0.35s;
-    }
-}
 
 .thumbnail-cell {
     display: inline-block;
-    padding-right: 2em;
     min-height: 210px;
 }
 

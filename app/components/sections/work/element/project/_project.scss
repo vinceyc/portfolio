@@ -20,6 +20,11 @@
 .component-project {
     color: $white;
 
+    .close-button {
+        display: inline-block;
+        float: right;
+    }
+
     .gallery-slide {
 
     }

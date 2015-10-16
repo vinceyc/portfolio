@@ -27,7 +27,12 @@ const NavComponent = React.createClass({
 
     return (
 
-      <div>
+      <div
+        className='column'
+        style={{
+          width: `${ baseGridWidth - 1 }rem`,
+          marginRight: `${ 1 }rem`
+        }}>
         <HeaderComponent
           changeSection={changeSection}
           baseGridWidth={baseGridWidth}
