@@ -16,7 +16,7 @@ const ViewportComponent = React.createClass({
       projectData: React.PropTypes.object,
       view: React.PropTypes.string,
       baseGridWidth: React.PropTypes.number,
-      projectIndex: React.PropTypes.number
+      idx: React.PropTypes.number
 
   },
 
@@ -26,7 +26,7 @@ const ViewportComponent = React.createClass({
       projectData,
       view,
       baseGridWidth,
-      projectIndex
+      idx
     } = this.props;
 
     const viewportDefaultStyle = {
@@ -43,22 +43,31 @@ const ViewportComponent = React.createClass({
 
     let
     width,
-    height,
-    galleryWidth,
-    galleryHeight,
-    viewportWidth,
-    viewportHeight;
+    height;
+
+    if ( view === 'phone' ) {
+        width = baseGridWidth;
+        height = baseGridWidth/663*1177;
+    }
+    if ( view === 'tablet' ) {
+        width = baseGridWidth;
+        height = baseGridWidth/540*417;
+    }
+    if ( view === 'desktop' ) {
+        width = baseGridWidth;
+        height = baseGridWidth/540*417;
+    }
 
     let renderedSection;
 
     if ( view === 'phone' ) {
-        renderedSection = <PhoneComponent width={viewportWidth} height={viewportHeight} />;
+        renderedSection = <PhoneComponent width={width} height={height} />;
     }
     if ( view === 'tablet' ) {
-        renderedSection = <TabletComponent baseGridWidth={baseGridWidth} />;
+        renderedSection = <TabletComponent width={width} height={height} />;
     }
     if ( view === 'desktop' ) {
-        renderedSection = <DesktopComponent baseGridWidth={baseGridWidth} />;
+        renderedSection = <DesktopComponent width={width} height={height} />;
     }
 
       return (
@@ -73,7 +82,7 @@ const ViewportComponent = React.createClass({
                   transform: `translate3d(${x}px, ${y}px, 0)`,
                   WebkitTransform: `translate3d(${x}px, ${y}px, 0)`,
                 }}>
-                Hello
+                { renderedSection }
 
               </div>
             }

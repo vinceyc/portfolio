@@ -6,22 +6,18 @@ import range from 'lodash.range';
 // C O M P O N E N T S
 import LetterComponent from './element/letter/Letter.jsx';
 
-// C O M P O N E N T S
-import PondRipples from './../../general/backgrounds/PondRipples.jsx';
-import Warphole from './../../general/backgrounds/Warphole.jsx';
-import Snake from './../../general/backgrounds/Snake.jsx';
 // D A T A
 import homeData from './../../../data/home.js';
 
-// const letterArray = range(homeData['title'].length);
-const letterArray = range(50);
+const letterArray = range(homeData['title'].length);
 
 const HomeComponent = React.createClass({
 
     propTypes: {
 
-        section: React.PropTypes.string,
-        baseGridWidth: React.PropTypes.number
+        baseGridWidth: React.PropTypes.number,
+        columns: React.PropTypes.number,
+        completeTransition: React.PropTypes.func,
 
     },
 
@@ -29,7 +25,7 @@ const HomeComponent = React.createClass({
 
         return {
             mouse: [0, 0],
-            firstConfig: [120,10],
+            firstConfig: [10,10],
             slider: {dragged: null, num: 0},
             lastPressed: [0, 0],
         };
@@ -37,6 +33,8 @@ const HomeComponent = React.createClass({
     },
 
     componentDidMount() {
+
+        this.props.completeTransition();
 
     },
 
@@ -50,17 +48,15 @@ const HomeComponent = React.createClass({
         } = this.state;
 
         const {
-            section,
             baseGridWidth
         } = this.props;
 
-        const factor = 8;
-
+        const factor = 4;
         const width = (baseGridWidth)/factor;
         const height = (baseGridWidth*4/3)/factor;
 
         return (
-            <section className='section component-home'>
+            <section className='component-home'>
                 { letterArray.map((row, i) => {
 
                     const cellStyle = {
@@ -69,13 +65,19 @@ const HomeComponent = React.createClass({
                     };
                     const stiffness = s0;
                     const damping = d0;
+
                     const defaultLetterStyle = {
-                        x: spring(i * -50, [stiffness, damping]),
-                        y: spring(0, [stiffness, damping]),
+                        x: spring(i * 100 * Math.random() * (Math.round(Math.random()) * 2 - 1), [stiffness*10, damping*4]),
+                        y: spring(i * 20 * Math.random() * (Math.round(Math.random()) * 2 - 1), [stiffness, damping]),
+                        o: spring(0, [stiffness*10, damping*4]),
+                        lightness: spring(0),
                     }
+
                     const letterStyle = {
-                        x: spring(0, [stiffness, damping]),
+                        x: spring(0, [stiffness*10, damping*4]),
                         y: spring(0, [stiffness, damping]),
+                        o: spring(1, [stiffness*10, damping*4]),
+                        lightness: spring(90 - (letterArray.length - i)*2, [stiffness, damping]),
                     }
 
                     return (
@@ -87,13 +89,14 @@ const HomeComponent = React.createClass({
                         <Motion
                         defaultStyle={ defaultLetterStyle }
                         style={ letterStyle }>
-                        {({x, y}) => {
+                        {({x, y, o, lightness}) => {
 
                             return (
 
                         <div
                           className="letter-wrapper"
                           style={{
+                            color: `hsl(221, 50%, ${lightness}%)`,
                             transform: `translate3d(${x}px, ${y}px, 0)`,
                             WebkitTransform: `translate3d(${x}px, ${y}px, 0)`,
                           }}

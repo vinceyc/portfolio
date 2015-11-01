@@ -5,13 +5,17 @@ import React from 'react';
 import HeaderComponent from './element/header/Header.jsx';
 import MenuComponent from './element/menu/Menu.jsx';
 
+import { Motion, spring } from 'react-motion';
+
 const NavComponent = React.createClass({
 
   propTypes: {
 
     baseGridWidth: React.PropTypes.number,
+    columns: React.PropTypes.number,
     changeSection: React.PropTypes.func,
-    section: React.PropTypes.string
+    section: React.PropTypes.string,
+    isMobile: React.PropTypes.bool
 
   },
 
@@ -20,31 +24,49 @@ const NavComponent = React.createClass({
     const {
       section,
       baseGridWidth,
-      changeSection
+      changeSection,
+      isMobile,
+      columns
     } = this.props;
 
-    const springValues = [250, 50];
+    const s0 = 100;
+    const d0 = 20;
+
+    const endStyle =
+    {
+        l: spring( 0, [s0, d0]),
+        o: spring( 100 ),
+        m: spring( 1 ),
+    };
 
     return (
+        <Motion defaultStyle={{l: -2, o: 0, m: 1}} style={ endStyle }>
+          {value =>
+            <div
+              className='header'
+              style={{
+                opacity: value.o/100,
+                transform: `translate3d(${ value.l }rem, 0, 0)`,
+                WebkitTransform: `translate3d(${ value.l }rem, 0, 0)`,
+                width: `${ (baseGridWidth * columns) - value.m }rem`,
+                height: `3rem`,
+                marginRight: `${ value.m }rem`
+              }}>
 
-      <div
-        className='column'
-        style={{
-          width: `${ baseGridWidth - 1 }rem`,
-          marginRight: `${ 1 }rem`
-        }}>
-        <HeaderComponent
-          changeSection={changeSection}
-          baseGridWidth={baseGridWidth}
-          springValues={springValues}
-          section={section} />
+              <HeaderComponent
+                changeSection={changeSection}
+                baseGridWidth={baseGridWidth}
+                section={section} />
 
-        <MenuComponent
-          changeSection={changeSection}
-          baseGridWidth={baseGridWidth}
-          springValues={springValues}
-          section={section} />
-      </div>
+              <MenuComponent
+                changeSection={changeSection}
+                baseGridWidth={baseGridWidth}
+                isMobile={ isMobile }
+                section={section} />
+
+            </div>
+          }
+        </Motion>
     );
   }
 });

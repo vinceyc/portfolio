@@ -1,15 +1,9 @@
 // S K I L L S  L I S T
 .list {
-    font-size: 1em;
-    color: $white;
-    letter-spacing: 1px;
-    font-weight: 400;
-    font-weight: 300;
-    transition: padding 0.4s ease-out;
-    -webkit-transition: padding 0.4s ease-out;
+    color: $text;
 
     li {
         position: absolute;
-        font-size: 0.75em;
+        font-size: 0.666rem;
     }
 }

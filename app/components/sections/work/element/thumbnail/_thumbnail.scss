@@ -1,9 +1,8 @@
 .project-item {
 
     a {
-      font-size: 0.6em;
       text-transform: uppercase;
-      color: $white;
+      color: $text;
       letter-spacing: 1px;
       margin-top: 1em;
       transition: padding 0.4s ease-out;
@@ -15,11 +14,12 @@
     }
 
     .thumbnail-link {
-      border-top: 1px dotted $white;
+      border-top: 1px dotted $text;
       display: block;
       width: 90%;
       margin: 1em 5%;
       padding: 1em 0 1.5em;
+      line-height: 1.333;
       transition: all 0.4s ease-out;
       -webkit-transition: all 0.4s ease-out;
 
@@ -30,8 +30,8 @@
       }
     }
 
-    transition: background 0.4s ease-in;
-    -webkit-transition: background 0.4s ease-in;
+    transition: all 0.4s ease-in;
+    -webkit-transition: all 0.4s ease-in;
 
 }
 
@@ -42,7 +42,7 @@
     background-position: center bottom;
     transition: all 0.4s ease-out;
     -webkit-transition: all 0.4s ease-out;
-    filter: grayscale(100%) contrast(120%);
+    filter: grayscale(100%) contrast(90%);
 }
 
 .thumbnail-wrapper {
@@ -50,7 +50,7 @@
 }
 
 .thumbnail-cell {
-    float: left;
+    position: absolute;
 
     div {
       width: 100%;
@@ -68,8 +68,8 @@
         width: 90%;
         margin: 1em 0%;
         padding: 1em 5% 1.5em;
-        color: $cyan;
-        border-color: $cyan;
+        color: $secondary-color;
+        border-color: $secondary-color;
       }
 
       .project-thumb {

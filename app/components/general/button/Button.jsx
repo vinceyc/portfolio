@@ -22,7 +22,6 @@ const ButtonComponent = React.createClass({
   },
 
   setActive() {
-    console.log('setActive');
     this.setState({
       isActive: true
     });
@@ -57,16 +56,22 @@ const ButtonComponent = React.createClass({
       height,
       width,
       keycode,
-      className,
-      isHeading
+      className
     } = this.props;
+
+    let correctWidth;
+
+    if (width == undefined) {
+      correctWidth = `100%`;
+    } else {
+      correctWidth = `${ width }rem`;
+    }
 
     const {
       isActive,
       isHovered
     } = this.state;
 
-    let classes;
     let activeClass;
 
     const buttonStyle = className==='pressed' || isHovered ? {
@@ -82,7 +87,6 @@ const ButtonComponent = React.createClass({
         shadow: 100
     };
 
-    classes = isHeading ? 'menu-button text-button' : 'text-button';
     activeClass = `component-button button-${ keycode } ${ className }`;
 
       return (
@@ -98,25 +102,16 @@ const ButtonComponent = React.createClass({
               onTouchStart={ this.handleTouchStart }
               className={ activeClass }
               style={{
-                width: `${ width - 1 }rem`,
+                width: correctWidth,
                 marginRight: `${ 1 }rem`,
-                height: `${ height }rem`,
-                background: `linear-gradient( 100deg,
-                  hsla(0, 0%, ${ highlight }%, 1),
-                  hsla(0, 0%, ${ shadow }%, 1) )`
+                height: `${ height }rem`
               }}>
                     <div
-                      className={ classes }
+                      className={`text-button ${ className }`}
                       data-hover={ text }
                       style={{
-                        background: `linear-gradient( 135deg,
-                        hsla(0, 0%, ${ shadow }%, 1),
-                        hsla(0, 0%, ${ highlight }%, 1) )`,
-                        lineHeight: `${ height - 0.5 }rem`,
-                        width: `${ width - 1.75 }rem`,
-                        height: `${ height - 0.5 }rem`,
-                        paddingLeft: `0.25rem`,
-                        margin: `0.25rem`,
+                        lineHeight: `${ height }rem`,
+                        height: `${ height}rem`,
                       }}>
                       { text }
                     </div>

@@ -29,17 +29,14 @@ const LetterComponent = React.createClass({
             width: `${ width }rem`,
             height: `${ height }rem`
           }}>
-            <svg height={ `${ height }rem` } width={ `${ width }rem` } xmlns='http://www.w3.org/2000/svg'>
-                <rect className='letter-shape' height={ `${ height }rem` } width={ `${ width }rem` } />
                 <div
                   className={ 'letter' }
                   style={{
                     lineHeight: `${ height }rem`,
-                    fontSize: `${ height*0.25 }rem`
+                    fontSize: `${ height*1/2 }rem`
                   }}>
                   { text }
                 </div>
-            </svg>
         </div>
 
       );

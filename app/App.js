@@ -2,29 +2,33 @@
 
 // I M P O R T
 import React from 'react';
-import { TransitionMotion, spring } from 'react-motion';
+import { Motion, spring } from 'react-motion';
 import range from 'lodash.range';
 
 React.initializeTouchEvents(true);
 
 // C O M P O N E N T S
 import NavComponent from './components/general/navigation/Navigation.jsx';
+// import PondRipples from './components/general/backgrounds/PondRipples.jsx';
 import SectionComponent from './components/sections/Section.jsx';
+
 const Main = React.createClass({
 
     getInitialState() {
         return {
-            section: 'work',
-            sections: ['work'],
-            firstConfig: [80,10],
-            isTransitioning: false,
-            baseGridWidth: 8
+            section: 'home',
+            firstConfig: [ 80, 10 ],
+            isFocused: false,
+            isMobile: false,
+            baseGridWidth: 9,
+            columns: 3
         }
     },
 
     componentWillMount() {
 
-        this.resize();
+        this.handleResize();
+        document.getElementById('container').style.opacity = 0.5;
 
     },
 
@@ -32,8 +36,9 @@ const Main = React.createClass({
 
         window.addEventListener('keydown', this.handleOnKeyDown);
         window.addEventListener('keyup', this.handleOnKeyUp);
+        window.addEventListener('resize', this.handleResize);
 
-      },
+    },
 
     handleOnKeyUp(e) {
 
@@ -41,131 +46,161 @@ const Main = React.createClass({
 
     handleOnKeyDown(e) {
 
-        if (e.keyCode === 87)
-        {
-          this.setState({ section: 'work', sections: ['work'] });
-        }
-        else if (e.keyCode === 83)
-        {
-          this.setState({ section: 'skills', sections: ['skills'] });
-        }
-        else if (e.keyCode === 67)
-        {
-          this.setState({ section: 'contact', sections: ['contact'] });
+        if (!this.state.isFocused) {
+
+            if (e.keyCode === 86)
+            {
+              this.setState({ section: 'home' });
+            }
+            else if (e.keyCode === 87)
+            {
+              this.setState({ section: 'work' });
+            }
+            else if (e.keyCode === 83)
+            {
+              this.setState({ section: 'skills' });
+            }
+            else if (e.keyCode === 67)
+            {
+              this.setState({ section: 'contact' });
+            }
+
         }
 
     },
 
-    resize() {
+    toggleFocusState(bool) {
+        this.setState({
+            isFocused: bool
+        });
+    },
 
-        console.log("[resize]");
+    toggleMobileState(bool) {
+        this.setState({
+            isMobile: bool
+        });
+    },
+
+    handleResize() {
 
         const width = window.innerWidth;
+        const windowDPR = window.devicePixelRatio;
+        const realWidth = width * windowDPR;
+        const appContainer = document.getElementById('App');
 
-        if ( width > 1890 ) {
-            this.setState({ baseGridWidth: 12 });
+        // console.log("[window width: "+width+" | window real width: "+realWidth+" | DPI: "+windowDPR+" | # columns: "+this.state.columns+" | base width: "+this.state.baseGridWidth+"em");
+
+        if ( realWidth >= 1440 * windowDPR ) {
+            console.log('1');
+            this.setState({
+                baseGridWidth: 12,
+                columns: 6,
+                isMobile: false
+            });
+
         }
-        if ( width > 1280 ) {
-            this.setState({ baseGridWidth: 9 });
+        else if ( realWidth <= 1440 * windowDPR && realWidth >= 1281 * windowDPR ) {
+            console.log('2');
+            this.setState({
+                baseGridWidth: 11,
+                columns: 6,
+                isMobile: false
+             });
         }
-        else if ( width > 860 ) {
-            this.setState({ baseGridWidth: 9 });
+        else if ( realWidth <= 1280 * windowDPR && realWidth >= 1141 * windowDPR ) {
+            console.log('3');
+            this.setState({
+                baseGridWidth: 9,
+                columns: 6,
+                isMobile: false
+             });
         }
-        else if ( width > 640 ) {
-            this.setState({ baseGridWidth: 9 });
+        else if ( realWidth <= 1140 * windowDPR && realWidth >= 961 * windowDPR ) {
+            console.log('4');
+            this.setState({
+                baseGridWidth: 11,
+                columns: 4,
+                isMobile: false
+             });
         }
+        else if ( realWidth <= 960 * windowDPR && realWidth >= 861 * windowDPR ) {
+            console.log('5');
+            this.setState({
+                baseGridWidth: 10,
+                columns: 4,
+                isMobile: true
+             });
+        }
+         else if ( realWidth <= 860 * windowDPR && realWidth >= 775 * windowDPR ) {
+            console.log('6');
+            this.setState({
+                baseGridWidth: 9,
+                columns: 4,
+                isMobile: true
+             });
+        }
+        else if ( realWidth <= 774 * windowDPR && realWidth >= 661 * windowDPR ) {
+            console.log('7');
+            this.setState({
+                baseGridWidth: 10,
+                columns: 3,
+                isMobile: true
+             });
+        }
+        else if ( realWidth <= 660 * windowDPR) {
+            console.log('8');
+            this.setState({
+                baseGridWidth: 10,
+                columns: 2,
+                isMobile: true
+             });
+        }
+
+        appContainer.style.width = `${this.state.baseGridWidth * this.state.columns}rem`;
 
     },
 
     changeSection(key) {
 
         if (key !== this.state.section) {
-
-            const {...newSection} = this.state.sections;
-
             this.setState({
-                section: key,
-                sections: [key],
-                isTransitioning: true
+                section: key
              });
         }
         event.preventDefault();
 
     },
 
-    getStyles() {
-        let configs = {};
-        Object.keys(this.state.sections).forEach(key => {
-          configs[key] = {
-            opacity: spring(1, [50, 10]),
-            text: this.state.sections[key]
-          };
-        });
-        return configs;
-    },
-
-    willEnter(key) {
-        return {
-          opacity: spring(0, [50, 10]),
-          text: this.state.sections[key]
-        };
-    },
-
-    willLeave(key, style) {
-        return {
-          opacity: spring(0, [50, 10]),
-          text: style.text,
-        };
-    },
-
-    handleClick(key) {
-        const {...newBlocks} = this.state.sections;
-        delete newBlocks[key];
-        this.setState({sections: newBlocks});
-    },
-
     render(){
 
         const {
             section,
-            isTransitioning,
+            isFocused,
+            isMobile,
             baseGridWidth,
+            columns,
             firstConfig: [s0, d0]
         } = this.state;
 
         return (
 
-            <div id='wrapper' className='wrapper'>
+            <div
+                id='wrapper'
+                className='wrapper'>
 
                 <NavComponent
-                    className='component-navigation column'
                     changeSection={ this.changeSection }
                     baseGridWidth={ baseGridWidth }
-                    isTransitioning={ isTransitioning }
+                    columns={ columns }
+                    isMobile={ isMobile }
                     section={ section } />
 
-                <TransitionMotion
-                    styles={this.getStyles()}
-                    willEnter={this.willEnter}
-                    willLeave={this.willLeave}>
-                    {interpolatedStyles =>
-                        <div
-                        style={{
-                          width: `${ (baseGridWidth * 3) + 3 }rem`,
-                          display: `inline-block`,
-                        }}>
-                        {Object.keys(interpolatedStyles).map(key => {
-                        const {text, ...style} = interpolatedStyles[key];
-                        return (
-                                <SectionComponent
-                                    key={ key }
-                                    section={ text }
-                                    baseGridWidth={ baseGridWidth } />
-                            );
-                            })}
-                        </div>
-                    }
-                </TransitionMotion>
+                <SectionComponent
+                    section={ section }
+                    baseGridWidth={ baseGridWidth }
+                    columns={ columns }
+                    isMobile={ isMobile }
+                    toggleFocusState={ this.toggleFocusState } />
 
             </div>
 

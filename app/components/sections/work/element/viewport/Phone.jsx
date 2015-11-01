@@ -52,8 +52,8 @@ const PhoneComponent = React.createClass({
             strokeDasharray
           }) =>
             <svg
-              viewBox={ `0 0 ${ width } ${ height }` }
-              width={ `${ width }px` } height={ `${ height }px` }>
+              viewBox={ `0 0 ${ width * 15 } ${ height * 15 }` }
+              width={ `${ width }rem` } height={ `${ height }rem` }>
               <path
                 id='bezel_2_' fill='none'
                 stroke={ `hsl(${ h }, ${ s }%, ${ l }%)` }

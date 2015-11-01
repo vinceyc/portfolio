@@ -6,7 +6,7 @@ const ThumbnailComponent = React.createClass({
   propTypes: {
 
       data: React.PropTypes.object,
-      baseGridWidth: React.PropTypes.number,
+      thumbnailWidth: React.PropTypes.number,
       active: React.PropTypes.bool
 
   },
@@ -15,7 +15,8 @@ const ThumbnailComponent = React.createClass({
 
     const {
       data,
-      baseGridWidth,
+      thumbnailWidth,
+      thumbnailHeight,
       active,
     } = this.props;
 
@@ -26,7 +27,7 @@ const ThumbnailComponent = React.createClass({
           <div
             className='project-thumb'
             style={{
-              height: `${ baseGridWidth*223/280 }rem`,
+              height: `${ thumbnailWidth*223/280 }rem`,
               backgroundImage: 'url(/assets/development/' + data['id'] + '/thumb.jpg)'
             }}>
           </div>

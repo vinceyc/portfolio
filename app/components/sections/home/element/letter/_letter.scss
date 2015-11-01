@@ -2,11 +2,12 @@ $time: 300ms;
 
 .letter-wrapper {
     height: 100%;
+    opacity: 0.75;
 }
 
 .letter-cell {
     position: relative;
-    float: left;
+    display: inline-block;
 }
 
 .component-letter {
@@ -14,34 +15,9 @@ $time: 300ms;
     margin: 0 auto;
     display: inline-block;
     overflow: visible;
-    font-family: 'Expletus Sans';
-    background: rgba(255,0,0,0.2);
-
-    &:hover {
-        cursor: pointer;
-
-        .letter-shape {
-            stroke-width: 1px;
-            stroke-dashoffset: 0;
-            stroke-dasharray: 30;
-        }
-    }
-}
-
-.letter-shape {
-    stroke-dasharray: 0 10;
-    stroke-dashoffset: -475;
-    stroke-width: 1px;
-    fill: transparent;
-    stroke: $cyan;
-    transition: stroke-width $time, stroke-dashoffset $time, stroke-dasharray $time;
-    position: absolute;
-    top: 0;
-    z-index: 1;
 }
 
 .letter {
-    color: $cyan;
     text-decoration: none;
     text-transform: uppercase;
     background: transparent;
@@ -51,28 +27,6 @@ $time: 300ms;
     height: 100%;
     position: absolute;
     top: 0;
-    text-align: center;
+    text-align: left;
     margin: 0;
-
-    &:hover {
-        outline: none;
-        color: $cyan;
-
-        &::before {
-            max-width: 500px;
-        }
-    }
-
-    &::before {
-        position: absolute;
-        top: 0;
-        left: 0;
-        overflow: hidden;
-        max-width: 0;
-        color: #333;
-        content: attr(data-hover);
-        -webkit-transition: max-width $time*2;
-        -moz-transition: max-width $time*2;
-        transition: max-width $time*2;
-    }
 }

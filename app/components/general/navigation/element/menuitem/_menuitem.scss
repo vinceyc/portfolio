@@ -1,13 +1,16 @@
 .menu-items {
-    display: inline-block;
-    padding-bottom: 0;
-    margin-bottom: 0;
-    border: 0;
-}
 
-.menu-button {
-
-    &.active {
-        color: $cyan
+    &:before {
+        content: '';
+        font-size: 1.5rem;
+        position: absolute;
+        top: 0.25rem;
+        left: -1rem;
+        color: $white;
     }
+
+    display: inline-block;
+    line-height: 0;
+    position: absolute;
+
 }

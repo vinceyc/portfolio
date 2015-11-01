@@ -2,6 +2,9 @@
 import React from 'react';
 import { Motion, spring } from 'react-motion';
 
+// C O M P O N E N T S
+import ButtonComponent from './../../../button/Button.jsx';
+
 const HeaderComponent = React.createClass({
 
   propTypes: {
@@ -9,7 +12,6 @@ const HeaderComponent = React.createClass({
     baseGridWidth: React.PropTypes.number,
     changeSection: React.PropTypes.func,
     section: React.PropTypes.string,
-    springValues: React.PropTypes.array
 
   },
 
@@ -19,32 +21,23 @@ const HeaderComponent = React.createClass({
       baseGridWidth,
       section,
       changeSection,
-      springValues: [s0, d0]
     } = this.props;
 
-    const endStyle =
-      {
-          w: spring( baseGridWidth, [s0, d0]),
-          l: spring( 0, [s0, d0]),
-          o: spring( 100 )
-      };
-
     return (
-        <Motion defaultStyle={{w: 0, l: -1200, o: 0}} style={ endStyle }>
-          {value =>
-             <h3
-              className='component-header'
-              onClick={changeSection.bind(null, 'home')}
-              onTouchStart={changeSection.bind(null, 'home')}
-              style={{
-                  opacity: value.o/100,
-                  transform: `translate3d(${ value.l }px, 0, 0)`,
-                  WebkitTransform: `translate3d(${ value.l }px, 0, 0)`,
-                  w: `${ value.w }%`
-              }}>Wonderwall
-            </h3>
-          }
-        </Motion>
+      <div
+        className='component-header'
+        onClick={changeSection.bind(null, 'home')}
+        onTouchStart={changeSection.bind(null, 'home')}>
+        <h1>
+
+            <ButtonComponent
+              text={ 'Vincent Chan: Front-end Developer' }
+              className={ section === 'home'  ? 'pressed' : ''}
+              height={ 0.75 }
+              keycode={ 86 }/>
+
+        </h1>
+      </div>
     );
   }
 });

@@ -11,17 +11,6 @@ li {
   list-style: none;
   margin: 0; }
 
-.section {
-  transition: opacity 1s; }
-
-.shown {
-  opacity: 1;
-  transition: opacity 1s;
-  transition: opacity 1s; }
-
-.swipe {
-  cursor: pointer; }
-
 html {
   width: 100%;
   height: 100%;
@@ -30,18 +19,34 @@ html {
 
 body {
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  overflow: hidden; }
+
+#App {
+  height: 100%;
+  margin: 0 auto;
+  overflow-x: hidden;
+  overflow-y: auto; }
+
+#container {
+  position: absolute;
+  opacity: 0;
+  transition: 4s opacity cubic-bezier(0.84, 0, 0.4, 1); }
 
 .wrapper {
-  height: 100%;
-  width: 90%;
-  padding: 3em 5% 0;
-  position: absolute;
-  overflow: auto; }
+  margin: 2rem 0 0;
+  min-height: 90%; }
 
-.column {
-  height: 100%;
-  float: left; }
+.header {
+  margin-bottom: 2rem; }
+
+.section {
+  display: block;
+  transition-delay: 1s;
+  transition: 0.3s opacity cubic-bezier(0.84, 0, 0.4, 1); }
+
+.hidden {
+  opacity: 0; }
 
 /* Small caps */
 /* Double quote (") marks */
@@ -78,68 +83,98 @@ body {
   margin-right: 0.03em; }
 
 body {
-  font-family: 'Source Sans Pro', 'Helvetica' sans-serif;
+  font-family: 'Karla', 'Source Sans Pro', 'Helvetica' sans-serif;
   font-weight: 400;
-  font-size: 15px; }
+  font-size: 18px; }
 
 p, span, h1, h2, h3, h4, h5, h6 {
-  color: black; }
+  color: #23192d; }
 
 a {
-  color: black; }
+  color: #23192d; }
   a:hover {
-    color: #47fcea; }
+    color: #eb423e; }
 
 h1, h2, h3, h5, h6 {
-  font-size: 2em;
-  font-weight: 400;
-  margin: 0;
-  line-height: 1.333;
-  letter-spacing: 1px; }
+  margin: 0; }
+
+p, li, .contact-link {
+  line-height: 1.5;
+  font-size: 0.75rem; }
+
+.project-item a {
+  font-size: 0.6rem; }
+
+.list li {
+  font-size: 0.75rem; }
+
+label {
+  font-size: 0.75rem;
+  line-height: 0;
+  font-weight: 700; }
 
 p {
-  line-height: 1.5;
-  font-size: 0.8em;
-  margin: 1em 0; }
+  margin: 0 0 1rem; }
 
-h2, h3, h4 {
+h1, h2, h3, h4 {
   text-transform: uppercase;
-  font-weight: 700;
   font-style: normal;
-  letter-spacing: 2px; }
+  line-height: 1.333;
+  letter-spacing: 0.05rem; }
 
-h2 {
-  font-size: 2em;
-  padding-bottom: 0.25em;
-  color: black;
-  letter-spacing: 0px;
-  line-height: 1;
-  border: none;
-  font-family: 'Expletus Sans', 'Source Sans Pro', 'Helvetica', sans-serif; }
+h1 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #23192d;
+  border-bottom: 1px solid #eb423e;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+  line-height: 1; }
 
 h3 {
-  font-size: 1em;
-  padding-bottom: 1em;
-  margin-bottom: 1em; }
+  font-size: 0.9rem;
+  font-weight: 400; }
 
 h4 {
-  border-color: #7a7873;
+  color: #395CAA;
+  border-color: #395CAA;
   letter-spacing: 1px;
-  font-size: 1em;
-  padding-bottom: 0.75em;
-  margin-bottom: 0.75em;
-  border-bottom: 1px dotted black; }
+  font-size: 0.75rem;
+  line-height: 1em;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px dotted #23192d; }
+  h4.work-title {
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: 0; }
+    h4.work-title span {
+      color: #395CAA;
+      text-transform: capitalize; }
+    h4.work-title .thumbnails-button {
+      font-weight: 400;
+      text-transform: uppercase;
+      float: right;
+      color: #23192d;
+      font-size: 0.75rem;
+      transition: 200ms color cubic-bezier(0.84, 0, 0.4, 1);
+      letter-spacing: 1px;
+      padding-left: 0.5rem; }
+      h4.work-title .thumbnails-button:hover {
+        color: #eb423e;
+        cursor: pointer; }
 
-.text-button {
-  font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
-  font-size: 0.75em;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-style: normal;
-  letter-spacing: 1px; }
+.project-detail h4 {
+  border-bottom: 0px; }
 
-.menu-button {
-  font-family: 'Expletus Sans', 'Source Sans Pro', 'Helvetica', sans-serif; }
+h5 {
+  font-size: 1.75rem;
+  padding-bottom: 0.25rem;
+  color: #23192d;
+  opacity: 0.4;
+  letter-spacing: 0px;
+  line-height: 1;
+  border: none; }
 
 /* ----------- iPhone 4 and 4S ----------- */
 @media only screen and (min-device-width: 0px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-width: 0px) and (max-device-width: 480px) and (min-resolution: 192dpi), only screen and (min-device-width: 0px) and (max-device-width: 480px) and (min-resolution: 2dppx) {
@@ -175,8 +210,8 @@ h4 {
   body {
     font-size: 20px; } }
 
-.wrapper {
-  background: linear-gradient(135deg, #e6e6e6, white); }
+body {
+  background: linear-gradient(135deg, white, #cccccc); }
 
 .texture {
   position: absolute;
@@ -200,6 +235,9 @@ h4 {
 .component-home {
   z-index: 1; }
 
+#container {
+  z-index: 0; }
+
 .component-background {
   opacity: 1;
   position: absolute;
@@ -213,12 +251,15 @@ h4 {
   width: 100%;
   height: 100%; }
 
+#threejs {
+  background: blue; }
+
 .warp-ring {
   width: 6em;
   height: 6em;
   border-radius: 12em;
   position: absolute;
-  border: 1px solid #47fcea; }
+  border: 1px solid #eb423e; }
 
 #warphole {
   position: absolute;
@@ -253,7 +294,7 @@ h4 {
   height: 6em;
   border-radius: 12em;
   position: absolute;
-  border: 1px solid #47fcea; }
+  border: 1px solid #eb423e; }
 
 .pond-stage, #pond-ripples {
   width: 100%;
@@ -280,105 +321,155 @@ h4 {
   border: 1px solid lightblue; }
 
 .component-button {
-  font-size: 0.75rem;
-  text-transform: lowercase;
-  font-weight: 400;
-  position: relative;
-  margin: 0 auto;
-  display: inline-block;
-  overflow: visible;
-  border-radius: 0.25em;
-  box-sizing: border-box;
-  transition: box-shadow 0.07s ease-in; }
+  display: inline-block; }
   .component-button:hover, .component-button.pressed {
-    cursor: pointer;
-    box-shadow: 0px 0px 5px 0px #fcfaf5; }
-    .component-button:hover:before, .component-button.pressed:before {
-      line-height: 1.7em;
-      color: #47fcea; }
-    .component-button:hover .text-button, .component-button.pressed .text-button {
-      outline: none;
-      color: #888; }
-      .component-button:hover .text-button::before, .component-button.pressed .text-button::before {
-        max-width: 500px;
-        transition: max-width 500ms ease-in; }
+    cursor: pointer; }
 
-.text-button {
-  color: black;
+.text-button::before {
+  position: absolute;
+  overflow: hidden;
+  max-width: 0px;
+  max-height: 0.75rem;
+  color: #eb423e;
+  content: attr(data-hover);
+  transition: max-width 250ms cubic-bezier(0.84, 0, 0.4, 1), color 250ms ease-in; }
+
+.text-button:hover, .text-button.pressed {
+  outline: none;
+  color: rgba(235, 66, 62, 0.5); }
+  .text-button:hover::before, .text-button.pressed::before {
+    max-width: 500px;
+    transition: max-width 1000ms cubic-bezier(0.84, 0, 0.4, 1); }
+
+.contact-form form {
+  margin-top: 1em; }
+
+.component-form {
+  position: relative;
+  margin: 0 auto 1em;
+  display: inline-block;
+  overflow: visible; }
+  .component-form svg {
+    pointer-events: none;
+    position: absolute; }
+  .component-form label {
+    position: absolute;
+    padding: 0.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: 1px; }
+  .component-form input, .component-form textarea, .component-form button {
+    border: 0;
+    padding: 0.25rem 0.5rem;
+    margin-left: 3rem;
+    outline: none; }
+  .component-form input, .component-form textarea {
+    background: #fcfaf5; }
+  .component-form textarea {
+    resize: none; }
+  .component-form input[type='submit'] {
+    padding: 0.75rem;
+    background: #395CAA;
+    outline: 1px solid #fcfaf5;
+    line-height: 0;
+    color: #fcfaf5;
+    text-transform: uppercase;
+    font-weight: 700;
+    opacity: 0.75;
+    transition: 400ms all cubic-bezier(0.84, 0, 0.4, 1); }
+    .component-form input[type='submit']:hover {
+      cursor: pointer; }
+    .component-form input[type='submit']:focus {
+      background: #fcfaf5;
+      color: #23192d;
+      opacity: 1; }
+  .component-form label {
+    transition: 400ms color cubic-bezier(0.84, 0, 0.4, 1); }
+    .component-form label.submit {
+      display: none; }
+    .component-form label.active {
+      color: #395CAA; }
+  .component-form:hover {
+    cursor: pointer; }
+    .component-form:hover .form-shape {
+      stroke-width: 1px;
+      stroke-dashoffset: 0;
+      stroke-dasharray: 750; }
+  .component-form .form-shape {
+    stroke-dasharray: 0 10;
+    stroke-dashoffset: -475;
+    stroke-width: 8px;
+    fill: transparent;
+    stroke: #eb423e;
+    opacity: 0;
+    border-bottom: 5px solid #fcfaf5;
+    transition: stroke-width 600ms, stroke-dashoffset 600ms, stroke-dasharray 600ms; }
+
+.text-form {
+  color: #23192d;
   position: absolute;
   top: 0;
   text-decoration: none;
-  border-radius: 0.25em; }
-  .text-button:hover {
+  overflow: hidden;
+  opacity: 1;
+  width: 90%;
+  margin: 0 5%; }
+  .text-form:hover {
     outline: none;
     color: #888; }
-    .text-button:hover::before {
-      max-width: 500px;
-      transition: max-width 500ms ease-in; }
-  .text-button::before {
-    position: absolute;
-    top: 0;
-    left: 0.25rem;
-    overflow: hidden;
-    max-width: 0;
-    color: #47fcea;
-    content: attr(data-hover);
-    transition: max-width 500ms ease-in; }
 
 .component-header {
-  padding: 0 0 1em;
-  color: #7a7873;
-  position: relative; }
+  display: inline-block;
+  float: left;
+  width: 100%; }
+  .component-header:hover {
+    cursor: pointer; }
 
 .component-menu {
-  display: block;
-  color: black;
-  margin-bottom: 2em;
-  position: relative; }
+  display: inline-block;
+  float: left;
+  color: #23192d;
+  position: relative;
+  width: 100%;
+  line-height: 0; }
+  .component-menu .menu-items {
+    display: inline-block;
+    line-height: 0;
+    position: absolute; }
+    .component-menu .menu-items:before {
+      content: '';
+      font-size: 1.5rem;
+      position: absolute;
+      top: 0.25rem;
+      left: -1rem;
+      color: #fcfaf5; }
 
 .menu-items {
   display: inline-block;
-  padding-bottom: 0;
-  margin-bottom: 0;
-  border: 0; }
-
-.menu-button.active {
-  color: #47fcea; }
+  line-height: 0;
+  position: absolute; }
+  .menu-items:before {
+    content: '';
+    font-size: 1.5rem;
+    position: absolute;
+    top: 0.25rem;
+    left: -1rem;
+    color: #fcfaf5; }
 
 .letter-wrapper {
-  height: 100%; }
+  height: 100%;
+  opacity: 0.75; }
 
 .letter-cell {
   position: relative;
-  float: left; }
+  display: inline-block; }
 
 .component-letter {
   position: relative;
   margin: 0 auto;
   display: inline-block;
-  overflow: visible;
-  font-family: 'Expletus Sans';
-  background: rgba(255, 0, 0, 0.2); }
-  .component-letter:hover {
-    cursor: pointer; }
-    .component-letter:hover .letter-shape {
-      stroke-width: 1px;
-      stroke-dashoffset: 0;
-      stroke-dasharray: 30; }
-
-.letter-shape {
-  stroke-dasharray: 0 10;
-  stroke-dashoffset: -475;
-  stroke-width: 1px;
-  fill: transparent;
-  stroke: #47fcea;
-  transition: stroke-width 300ms, stroke-dashoffset 300ms, stroke-dasharray 300ms;
-  position: absolute;
-  top: 0;
-  z-index: 1; }
+  overflow: visible; }
 
 .letter {
-  color: #47fcea;
   text-decoration: none;
   text-transform: uppercase;
   background: transparent;
@@ -388,54 +479,93 @@ h4 {
   height: 100%;
   position: absolute;
   top: 0;
-  text-align: center;
+  text-align: left;
   margin: 0; }
-  .letter:hover {
-    outline: none;
-    color: #47fcea; }
-    .letter:hover::before {
-      max-width: 500px; }
-  .letter::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-    max-width: 0;
-    color: #333;
-    content: attr(data-hover);
-    transition: max-width 600ms; }
 
-.component-home {
-  background: linear-gradient(135deg, #cccccc, white);
-  position: absolute;
+.component-thumbnails {
+  height: 100%;
+  float: left;
+  position: relative; }
+  .component-thumbnails::-webkit-scrollbar {
+    width: 0.5rem;
+    background: linear-gradient(135deg, white, #cccccc);
+    border-radius: 10px; }
+  .component-thumbnails::-webkit-scrollbar-thumb {
+    background: #cac8c3;
+    border-radius: 10px; }
+
+::-webkit-scrollbar {
+  width: 0.5rem; }
+
+.gallery-counter {
+  position: relative;
+  z-index: 5;
+  width: 1rem;
+  height: 1rem;
+  margin: 0 auto 1.5rem; }
+  .gallery-counter .gallery-counter-index,
+  .gallery-counter .gallery-counter-length {
+    position: absolute;
+    font-size: 1rem;
+    line-height: 0; }
+  .gallery-counter .gallery-counter-index {
+    top: 10%;
+    left: -25%; }
+  .gallery-counter .gallery-counter-length {
+    bottom: -10%;
+    right: -30%; }
+  .gallery-counter .arrow {
+    position: absolute;
+    line-height: 1rem;
+    height: 1rem;
+    width: 1.5rem;
+    font-size: 2rem;
+    text-align: center;
+    opacity: 0.9; }
+    .gallery-counter .arrow:hover {
+      color: #395CAA;
+      cursor: pointer; }
+  .gallery-counter .arrow-prev {
+    left: -2rem; }
+  .gallery-counter .arrow-next {
+    right: -2rem; }
+  .gallery-counter:before {
+    content: 'line';
+    color: transparent;
+    height: 1px;
+    background-color: #395CAA;
+    position: absolute;
+    width: 2.6rem;
+    top: 50%;
+    left: -80%;
+    -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg); }
+
+.gallery-carousel {
+  position: relative;
   height: 100%;
   width: 100%;
+  margin: 0 auto; }
+
+.gallery-slide {
+  position: absolute;
+  height: auto;
+  width: 100%;
+  opacity: 1;
+  text-align: center;
   top: 0; }
+  .gallery-slide:first-child {
+    position: relative; }
+  .gallery-slide img {
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto; }
 
 .component-gallery {
-  margin: 0 auto;
-  position: relative; }
-
-.thumbnail-gallery,
-.skills-gallery {
   width: 100%;
-  display: block; }
-
-.swipe {
-  border: 1px solid #777;
-  box-sizing: border-box; }
-
-.arrow {
-  position: absolute;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-  top: 50%; }
-
-.arrow-prev {
-  left: -3em; }
-
-.arrow-next {
-  right: -3em; }
+  display: block;
+  position: relative;
+  margin: 1rem auto; }
 
 .project-link {
   font-size: 0.666em;
@@ -447,23 +577,42 @@ h4 {
     position: absolute;
     top: 0;
     left: 0;
-    color: black;
+    color: #23192d;
     content: attr(data-hover);
     transition: max-width 1s; }
 
 .component-project {
-  color: black; }
+  color: #23192d;
+  margin-bottom: 3rem;
+  display: inline-block; }
   .component-project .close-button {
     display: inline-block;
     float: right; }
+    .component-project .close-button:hover {
+      cursor: pointer; }
+  .component-project .project-detail {
+    line-height: 1; }
+    .component-project .project-detail h4, .component-project .project-detail li {
+      display: inline-block; }
+    .component-project .project-detail h4 {
+      margin-bottom: 0.25rem;
+      padding-bottom: 0.25rem; }
+    .component-project .project-detail li {
+      margin-left: 0.25rem; }
+      .component-project .project-detail li:before {
+        content: '/';
+        padding-right: 0.25rem;
+        color: #395CAA; }
+    .component-project .project-detail li:nth-child(2):before {
+      content: '';
+      display: none; }
 
 .project-item {
-  transition: background 0.4s ease-in;
-  -webkit-transition: background 0.4s ease-in; }
+  transition: all 0.4s ease-in;
+  -webkit-transition: all 0.4s ease-in; }
   .project-item a {
-    font-size: 0.6em;
     text-transform: uppercase;
-    color: black;
+    color: #23192d;
     letter-spacing: 1px;
     margin-top: 1em;
     transition: padding 0.4s ease-out;
@@ -472,11 +621,12 @@ h4 {
     font-weight: 700;
     font-style: normal; }
   .project-item .thumbnail-link {
-    border-top: 1px dotted black;
+    border-top: 1px dotted #23192d;
     display: block;
     width: 90%;
     margin: 1em 5%;
     padding: 1em 0 1.5em;
+    line-height: 1.333;
     transition: all 0.4s ease-out;
     -webkit-transition: all 0.4s ease-out; }
     .project-item .thumbnail-link span {
@@ -491,14 +641,14 @@ h4 {
   background-position: center bottom;
   transition: all 0.4s ease-out;
   -webkit-transition: all 0.4s ease-out;
-  -webkit-filter: grayscale(100%) contrast(120%);
-          filter: grayscale(100%) contrast(120%); }
+  -webkit-filter: grayscale(100%) contrast(90%);
+          filter: grayscale(100%) contrast(90%); }
 
 .thumbnail-wrapper {
   overflow: hidden; }
 
 .thumbnail-cell {
-  float: left; }
+  position: absolute; }
   .thumbnail-cell div {
     width: 100%;
     height: 100%; }
@@ -506,42 +656,116 @@ h4 {
 .project-item.active,
 .project-item:hover {
   cursor: pointer;
-  background: linear-gradient(135deg, white, #f2f2f2); }
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)); }
   .project-item.active .thumbnail-link,
   .project-item:hover .thumbnail-link {
     width: 90%;
     margin: 1em 0%;
     padding: 1em 5% 1.5em;
-    color: #47fcea;
-    border-color: #47fcea; }
+    color: #395CAA;
+    border-color: #395CAA; }
   .project-item.active .project-thumb,
   .project-item:hover .project-thumb {
     background-size: 100%;
     -webkit-filter: grayscale(0%) contrast(100%);
             filter: grayscale(0%) contrast(100%); }
 
-.component-skills .thumbnail-cell {
-  display: inline-block;
-  min-height: 210px; }
+.component-skills .skills-cell {
+  display: inline-block; }
 
 .component-skills .list {
-  font-size: 1em;
-  color: black;
-  letter-spacing: 1px;
-  font-weight: 400;
-  font-weight: 300;
-  transition: padding 0.4s ease-out;
-  -webkit-transition: padding 0.4s ease-out; }
+  color: #23192d; }
   .component-skills .list li {
     position: absolute;
-    font-size: 0.75em; }
+    font-size: 0.666rem; }
+
+.component-contact .contact-profile,
+.component-contact .contact-form {
+  display: inline-block;
+  margin-bottom: 2rem; }
 
 .component-contact .contact-profile {
-  display: inline-block;
   float: left; }
 
 .component-contact .contact-form {
-  display: inline-block; }
+  position: relative; }
 
 .component-contact .contact-link {
   display: block; }
+
+.component-contact .contact-form form {
+  margin-top: 1em; }
+
+.component-contact .component-form {
+  position: relative;
+  margin: 0 auto 1em;
+  display: inline-block;
+  overflow: visible; }
+  .component-contact .component-form svg {
+    pointer-events: none;
+    position: absolute; }
+  .component-contact .component-form label {
+    position: absolute;
+    padding: 0.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: 1px; }
+  .component-contact .component-form input, .component-contact .component-form textarea, .component-contact .component-form button {
+    border: 0;
+    padding: 0.25rem 0.5rem;
+    margin-left: 3rem;
+    outline: none; }
+  .component-contact .component-form input, .component-contact .component-form textarea {
+    background: #fcfaf5; }
+  .component-contact .component-form textarea {
+    resize: none;
+    line-height: 2; }
+  .component-contact .component-form input[type='submit'] {
+    padding: 0.75rem;
+    background: #395CAA;
+    outline: 1px solid #fcfaf5;
+    line-height: 0;
+    color: #fcfaf5;
+    text-transform: uppercase;
+    font-weight: 700;
+    opacity: 0.75;
+    transition: 400ms all cubic-bezier(0.84, 0, 0.4, 1); }
+    .component-contact .component-form input[type='submit']:hover {
+      cursor: pointer; }
+    .component-contact .component-form input[type='submit']:focus {
+      background: #fcfaf5;
+      color: #23192d;
+      opacity: 1; }
+  .component-contact .component-form label {
+    transition: 400ms color cubic-bezier(0.84, 0, 0.4, 1); }
+    .component-contact .component-form label.submit {
+      display: none; }
+    .component-contact .component-form label.active {
+      color: #395CAA; }
+  .component-contact .component-form:hover {
+    cursor: pointer; }
+    .component-contact .component-form:hover .form-shape {
+      stroke-width: 1px;
+      stroke-dashoffset: 0;
+      stroke-dasharray: 750; }
+  .component-contact .component-form .form-shape {
+    stroke-dasharray: 0 10;
+    stroke-dashoffset: -475;
+    stroke-width: 8px;
+    fill: transparent;
+    stroke: #eb423e;
+    opacity: 0;
+    border-bottom: 5px solid #fcfaf5;
+    transition: stroke-width 600ms, stroke-dashoffset 600ms, stroke-dasharray 600ms; }
+
+.component-contact .text-form {
+  color: #23192d;
+  position: absolute;
+  top: 0;
+  text-decoration: none;
+  overflow: hidden;
+  opacity: 1;
+  width: 90%;
+  margin: 0 5%; }
+  .component-contact .text-form:hover {
+    outline: none;
+    color: #888; }

@@ -1,63 +1,34 @@
-$time: 500ms;
+$time: 1000ms;
 
 .component-button {
-    font-size: 0.75rem;
-    text-transform: lowercase;
-    font-weight: 400;
-    position: relative;
-    margin: 0 auto;
     display: inline-block;
-    overflow: visible;
-    border-radius: 0.25em;
-    box-sizing: border-box;
-    transition: box-shadow 0.07s ease-in;
 
     &:hover, &.pressed {
         cursor: pointer;
-        box-shadow: 0px 0px 5px 0px $black;
-
-        &:before {
-            line-height: 1.7em;
-            color: $cyan;
-        }
-
-        .text-button {
-            outline: none;
-            color: #888;
-
-            &::before {
-                max-width: 500px;
-                transition: max-width $time ease-in;
-            }
-        }
     }
 }
 
 .text-button {
-    color: $white;
-    position: absolute;
-    top: 0;
-    text-decoration: none;
-    border-radius: 0.25em;
-
-    &:hover {
-        outline: none;
-        color: #888;
-
-        &::before {
-            max-width: 500px;
-            transition: max-width $time ease-in;
-        }
-    }
 
     &::before {
         position: absolute;
-        top: 0;
-        left: 0.25rem;
         overflow: hidden;
-        max-width: 0;
-        color: $cyan;
+        max-width: 0px;
+        max-height: 0.75rem;
+        color: $color;
         content: attr(data-hover);
-        transition: max-width $time ease-in;
+        transition: max-width $time/4 $curve, color $time/4 ease-in;
     }
+
+    &:hover, &.pressed {
+        outline: none;
+        color: rgba($color, 0.5);
+
+        &::before {
+            max-width: 500px;
+            transition: max-width $time $curve;
+        }
+    }
+
+
 }

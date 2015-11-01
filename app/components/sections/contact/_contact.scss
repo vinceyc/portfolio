@@ -1,16 +1,21 @@
 .component-contact {
 
-    .contact-profile {
-        display: inline-block;
-        float: left;
-    }
-
+    .contact-profile,
     .contact-form {
         display: inline-block;
+        margin-bottom: 2rem;
+    }
+    .contact-profile {
+        float: left;
+    }
+    .contact-form {
+        position: relative;
     }
 
     .contact-link {
         display: block;
     }
+
+    @import 'element/form/_form.scss';
 
 }

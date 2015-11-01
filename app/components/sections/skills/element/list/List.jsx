@@ -30,13 +30,13 @@ const ListComponent = React.createClass({
         const defaultValue = {
           top: spring(4000),
           opacity: spring(0),
-          lightness: spring(63)
+          lightness: spring(100)
         };
 
         const endValue = {
           top: spring(1+2*(i+1), [80+(i*20), 10]),
           opacity: spring(100, [80+(i*20), 10]),
-          lightness: spring(100, [30+(i*2), 80]),
+          lightness: spring(0, [30+(i*2), 80]),
         };
 
         return (
@@ -45,13 +45,12 @@ const ListComponent = React.createClass({
             key={i}
             defaultStyle={ defaultValue }
             style={ endValue }>
-
           {
             values =>
               <li style={{
                 top: `${values.top}em`,
                 opacity: `${values.opacity}/100`,
-                color: `hsl(174, 97%, ${values.lightness}%)`
+                color: `hsl(221, 50%, ${values.lightness}%)`
               }}>
 
                 {skill}

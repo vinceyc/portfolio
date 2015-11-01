@@ -11,89 +11,89 @@ import workData from './../../../../../data/work.js';
 
 const ProjectComponent = React.createClass({
 
-  propTypes: {
-    projectIndex: React.PropTypes.number,
-    baseGridWidth: React.PropTypes.number,
-    exitProject: React.PropTypes.func,
-    view: React.PropTypes.string
-  },
+    propTypes: {
 
-  render() {
+        idx: React.PropTypes.number,
+        baseGridWidth: React.PropTypes.number,
+        nextProject: React.PropTypes.func,
+        prevProject: React.PropTypes.func,
+        exitProject: React.PropTypes.func,
+
+    },
+
+    render() {
 
     const {
-      projectIndex,
-      baseGridWidth,
-      exitProject,
-      view
+        idx,
+        baseGridWidth,
+        nextProject,
+        prevProject,
+        exitProject
     } = this.props;
 
-    let renderSection;
     let renderedLink = <span></span>;
 
-    if (workData[projectIndex]['link']) {
+    if (workData[idx]['link']) {
 
-      renderedLink = <a href={ workData[projectIndex]['link'] } target='_blank'>Link to Project</a>;
+        renderedLink =
+        <ul className='project-detail'>
+            <h4>Link</h4>
+            <li><a href={ workData[idx]['link'] } target='_blank'>{ workData[idx]['link'] }</a></li>
+        </ul>;
 
     }
 
-      return (
-        <section className='component-project'>
+    const s1 = 40;
+    const d1 = 20;
 
-            <div
-                className='close-button'
-                onClick={ exitProject }
-                onTouchStart={ exitProject }>
+    const defaultProjectStyle = {
+        o: spring( 50, [s1, d1])
+    };
 
-              <ButtonComponent
-                text={ 'esc' }
-                width={ 3 }
-                height={ 2 }
-                keycode={ 0 }
-                isHeading={ false } />
+    const ProjectStyle = {
+        o: spring(100, [s1, d1])
+    };
 
-            </div>
-            <h2>{ workData[projectIndex]['title'] }</h2>
-            <h4>{ workData[projectIndex]['description'] }</h4>
+    return (
+        <Motion
+            defaultStyle={ defaultProjectStyle }
+            style={ ProjectStyle }>
+            {({o}) => {
+            return (
+                <div
+                style={{
+                    opacity: `${ o/100 }`,
+                }}>
 
-          <div
-            className='column'
-            style={{
-              width: `${ baseGridWidth - 1 }rem`,
-              marginRight: `${ 1 }rem`
-            }}>
+                    <h4 className='work-title'>{ workData[idx]['title'] }
+                        <span className='thumbnails-button'
+                        onClick={ exitProject }
+                        onTouchStart={ exitProject }>
+                            all projects
+                        </span>
+                    </h4>
 
+                    { renderedLink }
 
-              { renderedLink  }
+                    <ul className='project-detail'>
+                        <h4>Built With</h4>
+                        {workData[idx]['tech'].map((row, i) => {
+                            return (<li key={ i }>{ row }</li>)
+                        })}
+                    </ul>
 
-              <p>
-                { workData[projectIndex]['description'] }
-              </p>
+                    <ul className='project-detail'>
+                        <h4>Description</h4>
+                        <li>{ workData[idx]['description'] }</li>
+                    </ul>
 
-              <ul className='list'>
-              <h4 className='list-title'>Built With</h4>
-                {workData[projectIndex]['tech'].map((row, i) => {
-                  return (<li key={ i }>{ row }</li>)
-                })}
-              </ul>
+                </div>
+            );
+            }}
+        </Motion>
+    );
 
-          </div>
-
-          <div
-            className='column'
-            style={{
-              width: `${ baseGridWidth*3 }rem`,
-            }}>
-              <ViewportComponent
-                projectIndex={ projectIndex }
-                projectData={ workData[projectIndex] }
-                view={ workData[projectIndex]['view'] }
-                baseGridWidth={ baseGridWidth } />
-
-          </div>
-
-        </section>
-      );
-  }
+    }
 
 });
 

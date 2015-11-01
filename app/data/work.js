@@ -33,7 +33,7 @@ const workData = [
         'description' : 'The Gift Social Visualisation Mobile site',
         'tech' : ['React.js', 'Spreadfast', 'HTML5', 'CSS3'],
         'type' : 'Mobile Website',
-        'link' : 'http://www.missionimpossible.com/',
+        'link' : 'http://social.giftmovie.com/',
         'view' : 'phone'
     },
     {
@@ -50,8 +50,8 @@ const workData = [
             '8.jpg',
             '9.jpg'
         ],
-        'description' : 'Mission Impossible 5 Mobile site',
-        'tech' : ['React.js', 'HTML5', 'CSS3'],
+        'description' : 'UI and visual design and front-end implementation for a file extranet system for internal company use. Built with Django and Python templating.',
+        'tech' : [ 'HTML5', 'CSS3', 'Django', 'Python' ],
         'type' : 'Web App',
         'view' : 'desktop'
     },
@@ -66,7 +66,7 @@ const workData = [
             '5.jpg',
             '6.jpg'
         ],
-        'description' : '',
+        'description' : 'Made using Wordpress as the backend, this website was made for a famous makeup studio in Hong Kong. Includes multiple gallery types and showcases, a video gallery and multiple languages.',
         'tech' : ['Wordpress', 'HTML5', 'CSS'],
         'type' : 'Wordpress Website',
         'link' : 'http://www.anniegchanmakeup.com/',

@@ -7,6 +7,7 @@ import range from 'lodash.range';
 import ProjectComponent from './element/project/Project.jsx';
 import ThumbnailComponent from './element/thumbnail/Thumbnail.jsx';
 import GalleryComponent from './element/gallery/Gallery.jsx';
+import ViewportComponent from './element/viewport/Viewport.jsx';
 
 // D A T A
 import workData from './../../../data/work.js';
@@ -16,176 +17,273 @@ const projectArray = range(workData.length);
 
 const WorkComponent = React.createClass({
 
-  propTypes: {
+    propTypes: {
 
-    section: React.PropTypes.string,
-    baseGridWidth: React.PropTypes.number
+        baseGridWidth: React.PropTypes.number,
+        columns: React.PropTypes.number,
+        isMobile: React.PropTypes.bool,
 
-  },
+    },
 
-  getInitialState() {
-    return {
-      mouse: [0, 0],
-      firstConfig: [60,10],
-      slider: {dragged: null, num: 0},
-      lastPressed: [0, 0],
-      projectIndex: 1,
-    };
-  },
+    getInitialState() {
+        return {
+            firstConfig: [60, 10],
+            idx: null
+        };
+    },
 
-  componentDidMount() {
+    componentDidMount() {
 
+        this.props.completeTransition();
         window.addEventListener('keydown', this.handleOnKeyDown);
         window.addEventListener('keyup', this.handleOnKeyUp);
 
-      },
+    },
 
-  handleOnKeyDown(e) {
+    handleOnKeyDown(e) {
 
-      if (e.keyCode === 27)
-      {
-        this.setState({ projectIndex: null });
-      }
+        if (e.keyCode === 27)
+        { this.setState({ idx: null }) }
 
-  },
+    },
 
-  handleTouchStart(i) {
+    handleTouchStart(i) {
 
-      this.enterProject(i);
+        this.enterProject(i);
 
-  },
+    },
 
-  handleMouseDown(i) {
+    handleMouseDown(i) {
 
-      this.enterProject(i);
+        this.enterProject(i);
 
-  },
+    },
 
-  enterProject(i) {
-      if (typeof(i) == 'number') {
-        this.setState({ projectIndex: i });
-      } else {
-        console.log("not a number");
-      }
-  },
+    enterProject(i) {
 
-  exitProject() {
-      this.setState({ projectIndex: null });
-  },
+        if (typeof(i) == 'number') {
+            this.setState({ idx: i });
+        }
+        document.getElementById('App').style.scrollTop = 0;
 
+    },
+
+    exitProject() {
+        this.setState({
+            idx: null
+        });
+    },
+
+    nextProject() {
+
+        let currentIdx = this.state.idx;
+        if (currentIdx == workData.length - 1) {
+            this.setState({ idx: 0 });
+        } else {
+            this.setState({ idx: currentIdx + 1 });
+        }
+
+    },
+
+     prevProject() {
+
+        let currentIdx = this.state.idx;
+        if (currentIdx == 0) {
+            this.setState({ idx: workData.length - 1 });
+        } else {
+            this.setState({ idx: currentIdx - 1 });
+        }
+
+    },
 
    render() {
+
     const {
       mouse,
-      lastPressed,
       firstConfig: [s0, d0],
-      slider: {dragged, num},
-      projectIndex
+      idx
     } = this.state;
 
     const {
-      section,
-      baseGridWidth
+      baseGridWidth,
+      columns,
+      isMobile
     } = this.props;
 
-    let renderedProject;
     let renderedGallery;
+    let renderedProject;
+    let renderedViewport;
 
-    if (projectIndex !== null) {
-      renderedProject = <ProjectComponent
-        projectIndex={ projectIndex }
+    const projectViewThumbnailsWidth = isMobile ? 0 : 1;
+    const projectViewThumbnailsDisplay = isMobile && idx !== null ? 'none' : 'inline-block';
+    const rows = idx == null ? Math.ceil( workData.length / columns ) : 3;
+    const heightRatio = 1.25;
+
+    if (idx !== null) {
+      renderedProject =
+       <ProjectComponent
+        idx={ idx }
+        nextProject={ this.nextProject }
+        prevProject={ this.prevProject }
         exitProject={ this.exitProject }
-        view={ workData[projectIndex]['view'] }
         baseGridWidth={ baseGridWidth } />;
 
-      renderedGallery = <GalleryComponent
-        projectIndex={ projectIndex }
+      renderedGallery =
+      <GalleryComponent
+        idx={ idx }
+        gallery={ workData[idx]['gallery'] }
+        id={ workData[idx]['id'] }
+        isMobile={ isMobile }
+        nextProject={ this.nextProject }
+        prevProject={ this.prevProject }
+        baseGridWidth={ baseGridWidth * (columns - projectViewThumbnailsWidth) - 1 } />;
+
+      renderedViewport =
+      <ViewportComponent
+        idx={ idx }
+        projectData={ workData[idx] }
+        view={ workData[idx]['view'] }
         baseGridWidth={ baseGridWidth } />;
     }
 
-    const projectStyle = projectIndex == null
+    const galleryStyle = idx == null
     ? {
-        x: spring( -500 , [s0, d0]),
-        y: spring( -1200 , [s0, d0]),
+        w: spring( columns , [s0, d0]),
+        h: spring( 10 , [s0, d0]),
+        o: spring( 100 , [s0, d0]),
+      }
+    : {
+        w: spring( projectViewThumbnailsWidth , [s0, d0]),
+        h: spring( 3 , [s0, d0]),
+        o: spring( 100 , [s0, d0]),
+      };
+
+    const projectStyle = idx == null
+    ? {
+        w: spring( 0 , [s0, d0]),
+        x: spring( 0 , [s0, d0]),
+        y: spring( 12 , [s0, d0]),
         o: spring( 0 , [20, d0]),
       }
     : {
+        w: spring( 100, [s0, d0]),
         x: spring( 0, [s0, d0]),
         y: spring( 0, [s0, d0]),
         o: spring( 100 ),
       };
 
     return (
-      <section
-        className='section component-work column'
+      <section className='component-work'
         style={{
-          width: `${ (baseGridWidth * 3) + 3 }rem`,
-        }}>
-        <Motion style={ projectStyle }>
-          {({x, y, o}) =>
-            <div
-              style={{
-                opacity: o/100,
-                transform: `translate3d(${x}px, ${y}px, 0)`,
-                WebkitTransform: `translate3d(${x}px, ${y}px, 0)`,
-              }}>
-              { renderedProject }
-              { renderedGallery }
-            </div>
-          }
-        </Motion>
+                height: `${ baseGridWidth * rows * heightRatio }rem`,
+            }}>
+        <Motion style={ galleryStyle }>
+        {({w, h, o}) =>
+        <div
+            className={(idx !== null) ? 'component-thumbnails project-view' : 'component-thumbnails'}
+            style={{
+                width: `${ baseGridWidth * w + projectViewThumbnailsWidth }rem`,
+                display: `${ projectViewThumbnailsDisplay }`,
+                opacity: `${ o/100 }`,
+            }}>
+          { projectArray.map((item, i) => {
 
-        <div className={(projectIndex !== null) ? 'thumbnail-gallery project-view' : 'thumbnail-gallery'}>
-          { projectArray.map((row, i) => {
-              const cellStyle = {
-                width: `${ baseGridWidth }rem`,
-                height: `${ baseGridWidth*4/3 }rem`
-              };
-              const stiffness = s0 + i * 30;
-              const damping = d0 + i * 2;
-              const motionStyle = projectIndex !== null
-                ? {
-                    x: spring(0, [stiffness, damping]),
-                    y: spring(0, [stiffness, damping]),
-                  }
-                : {
-                    x: spring(0, [stiffness, damping]),
-                    y: spring(0, [stiffness, damping]),
-                  };
+            const s1 = s0 + i * 5;
+            const d1 = d0 + i;
+            const k = i % 2 == 0 ? -1 : 1;
+            const opacity = Math.floor(Math.random() * (Math.round(Math.random())) * 100 / 6);
+
+            const column = i - columns*(Math.floor(i/columns));
+            const row = Math.floor(i/columns);
+
+            const defaultCellStyle =
+            {
+                x: spring(baseGridWidth * column, [s1, d1]),
+                y: spring(baseGridWidth * heightRatio * row, [s1, d1]),
+                o: spring(opacity, [s1, d1])
+            };
+
+            const nextProjectIdx = idx == workData.length - 1 ? 0 : idx + 1;
+            const prevProjectIdx = idx == 0 ? workData.length - 1 : idx - 1;
+
+            const cellStyle = idx == null
+            ? {
+                x: spring(baseGridWidth * column, [s1, d1]),
+                y: spring(baseGridWidth * heightRatio * row, [s1, d1]),
+                o: spring(100, [s1, d1])
+            }
+            : i == prevProjectIdx ? {
+                x: spring(0, [s1, d1]),
+                y: spring(baseGridWidth * heightRatio * 0, [s1, d1]),
+                o: spring(85, [s1, d1])
+            }
+            : i == idx ? {
+                x: spring(0, [s1, d1]),
+                y: spring(baseGridWidth * heightRatio * 1, [s1, d1]),
+                o: spring(100, [s1, d1])
+            }
+            : i == nextProjectIdx ? {
+                x: spring(0, [s1, d1]),
+                y: spring(baseGridWidth * heightRatio * 2, [s1, d1]),
+                o: spring(85, [s1, d1])
+            }
+            : {
+                x: spring(0, [s1, d1]),
+                y: spring(baseGridWidth * heightRatio * 1, [s1, d1]),
+                o: spring(0, [s1, d1])
+            };
 
               return (
-                <div
+                <Motion
                   key={ i }
-                  style={ cellStyle }
-                  onMouseDown={this.handleMouseDown.bind(null, i)}
-                  onTouchStart={this.handleTouchStart.bind(null, i)}
-                  className="thumbnail-cell">
-                  <Motion
-                    defaultStyle={{ x: 1000, y: 0 }}
-                    style={ motionStyle }>
-                    {({x, y}) => {
-
-                      return (
-                        <div
-                          className="thumbnail-wrapper"
-                          style={{
-                            transform: `translate3d(${x}px, ${y}px, 0)`,
-                            WebkitTransform: `translate3d(${x}px, ${y}px, 0)`,
-                          }}
-                          >
-                          <ThumbnailComponent
-                            key={ i }
-                            data={ workData[i] }
-                            active={ projectIndex===i ? true : false }
-                            baseGridWidth={ baseGridWidth } />
-                        </div>
-                      );
-                    }}
-                  </Motion>
-                </div>
+                  defaultStyle={ defaultCellStyle }
+                  style={ cellStyle }>
+                  {({x, y, o}) => {
+                    return (
+                      <div
+                        id={`thumbnail-${i}`}
+                        className={`thumbnail-cell`}
+                        onMouseDown={this.handleMouseDown.bind(null, i)}
+                        style={{
+                          width: `${ baseGridWidth }rem`,
+                          height: `${ baseGridWidth * heightRatio }rem`,
+                          transform: `translate3d(${x}rem, ${y}rem, 0)`,
+                          WebkitTransform: `translate3d(${x}rem, ${y}rem, 0)`,
+                          opacity: `${o/100}`,
+                        }}
+                        >
+                        <ThumbnailComponent
+                          key={ i }
+                          data={ workData[i] }
+                          active={ idx===i ? true : false }
+                          thumbnailWidth={ baseGridWidth } />
+                      </div>
+                    );
+                  }}
+                </Motion>
               );
           })}
         </div>
+        }
+        </Motion>
+        <Motion style={ projectStyle }>
+          {({w, x, y, o}) =>
+            <div
+              className='component-project'
+              style={{
+                opacity: o/100,
+                width: `${ ((baseGridWidth * (columns - projectViewThumbnailsWidth)) - projectViewThumbnailsWidth*3) * w/100 }rem`,
+                transform: `translate3d(${x}rem, ${y}rem, 0)`,
+                WebkitTransform: `translate3d(${x}rem, ${y}rem, 0)`,
+                marginLeft: `${ projectViewThumbnailsWidth }rem`,
+              }}>
+
+              { renderedProject }
+              { renderedGallery }
+
+            </div>
+          }
+        </Motion>
       </section>
     );
   },

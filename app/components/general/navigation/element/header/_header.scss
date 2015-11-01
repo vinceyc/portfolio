@@ -1,7 +1,11 @@
 .component-header {
 
-    padding: 0 0 1em;
-    color: $grey;
-    position: relative;
+    display: inline-block;
+    float: left;
+    width: 100%;
+
+    &:hover {
+        cursor: pointer;
+    }
 
 }

@@ -143,7 +143,7 @@ const FormComponent = React.createClass({
       formElement =
         <input
           type='text'
-          id={ type }
+          name={ type }
           defaultValue='Name:'
           onBlur={ this.handleOnBlur }
           onFocus={ this.handleOnFocus }
@@ -156,7 +156,7 @@ const FormComponent = React.createClass({
       formElement =
         <input
           type='text'
-          id={ type }
+          name={ type }
           defaultValue='E-mail:'
           onBlur={ this.handleOnBlur }
           onFocus={ this.handleOnFocus }
@@ -168,6 +168,7 @@ const FormComponent = React.createClass({
     {
       formElement =
         <textarea
+          name={ type }
           defaultValue='Message:'
           onBlur={ this.handleOnBlur }
           onFocus={ this.handleOnFocus }

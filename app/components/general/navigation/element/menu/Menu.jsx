@@ -15,7 +15,7 @@ const MenuComponent = React.createClass({
     baseGridWidth: React.PropTypes.number,
     changeSection: React.PropTypes.func,
     section: React.PropTypes.string,
-    springValues: React.PropTypes.array
+    isMobile: React.PropTypes.bool
 
   },
 
@@ -25,47 +25,32 @@ const MenuComponent = React.createClass({
       section,
       baseGridWidth,
       changeSection,
-      springValues: [s0, d0]
+      isMobile
     } = this.props;
 
-    const endStyle = section === 'home' ?
-      {
-          left: spring( baseGridWidth, [s0, d0]),
-          top: spring( 1, [s0, d0] )
-      } :
-      {
-          left: spring( 0, [s0, d0]),
-          top: spring( 0, [s0, d0] )
-      };
+    const s0 = 40;
+    const d0 = 20;
+
 
     return (
-        <Motion style={ endStyle }>
-          {value =>
-              <div
-                  className='component-menu'
-                  style={{
-                      left: `${ value.left }em`,
-                      WebkitTransform: `translate3d(0, ${ value.top }em, 0)`,
-                      transform: `translate3d(0, ${ value.top }em, 0)`,
-                  }}>
+      <div className='component-menu'>
 
-                  { menuData.map( function ( menu, i ) {
+          { menuData.map( function ( menu, i ) {
 
-                      return (
+              return (
 
-                        <MenuitemComponent
-                          changeSection={ changeSection.bind( null, menu['ref'], i ) }
-                          section={ section }
-                          key={ i }
-                          idx={ i }
-                          baseGridWidth={ baseGridWidth }
-                          data={ menu } />
-                      );
+                <MenuitemComponent
+                  changeSection={ changeSection.bind( null, menu['ref'], i ) }
+                  section={ section }
+                  isMobile={ isMobile }
+                  baseGridWidth={ baseGridWidth }
+                  key={ i }
+                  idx={ i }
+                  data={ menu } />
+              );
 
-                  }.bind( this ))}
-              </div>
-          }
-        </Motion>
+          }.bind( this ))}
+      </div>
     );
   }
 });

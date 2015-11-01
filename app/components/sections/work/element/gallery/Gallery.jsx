@@ -1,8 +1,6 @@
 // I M P O R T
 import React from 'react';
-import ReactSwipe from 'react-swipe';
-
-React.initializeTouchEvents(true);
+import {Motion, spring} from 'react-motion';
 
 // C O M P O N E N T S
 import ButtonComponent from './../../../../general/button/Button.jsx';
@@ -12,27 +10,35 @@ import workData from './../../../../../data/work.js';
 
 const GalleryComponent = React.createClass({
 
+  getInitialState() {
+
+        return {
+            activeSlide: 0,
+            isListView: false,
+        };
+
+    },
+
   propTypes: {
 
-      projectIndex: React.PropTypes.number,
-      baseGridWidth: React.PropTypes.number,
+        idx: React.PropTypes.number,
+        id: React.PropTypes.string,
+        gallery: React.PropTypes.array,
+        baseGridWidth: React.PropTypes.number,
+        isMobile: React.PropTypes.bool,
+        nextProject: React.PropTypes.func,
+        prevProject: React.PropTypes.func,
 
   },
 
-  componentWillRecieveProps() {
+  componentWillReceiveProps() {
 
-    console.log("gallery componentWillRecieveProps");
-  },
-
-  componentWillUnmount() {
-
-    console.log("gallery componentWillUnmount");
+    this.setState({ activeSlide: 0 });
 
   },
 
   componentDidMount() {
 
-    this.refs.carousel.swipe.slide( 0, 10 );
     window.addEventListener('keydown', this.handleOnKeyDown);
     window.addEventListener('keyup', this.handleOnKeyUp);
 
@@ -40,8 +46,6 @@ const GalleryComponent = React.createClass({
 
   handleOnKeyUp(e) {
 
-      React.findDOMNode(this.refs.arrowNext).classList.remove('pressed');
-      React.findDOMNode(this.refs.arrowPrev).classList.remove('pressed');
 
   },
   handleOnKeyDown(e) {
@@ -49,14 +53,12 @@ const GalleryComponent = React.createClass({
     if (e.keyCode === 39)
     {
       if (React.findDOMNode(this.refs.arrowNext)) {
-        React.findDOMNode(this.refs.arrowNext).classList.add('pressed');
         this.next();
       }
     }
     else if (e.keyCode === 37)
     {
       if (React.findDOMNode(this.refs.arrowPrev)) {
-        React.findDOMNode(this.refs.arrowPrev).classList.add('pressed');
         this.prev();
       }
     }
@@ -65,100 +67,121 @@ const GalleryComponent = React.createClass({
 
   next() {
 
-    this.refs.carousel.swipe.next();
+    let index = this.state.activeSlide;
+
+    if (index === this.props.gallery.length-1) {
+      this.setState({ activeSlide: 0 });
+    } else {
+      this.setState({ activeSlide: index+1 });
+    }
 
   },
 
   prev() {
 
-    this.refs.carousel.swipe.prev();
+    let index = this.state.activeSlide;
+
+    if (index === 0) {
+      this.setState({ activeSlide: this.props.gallery.length-1 });
+    } else {
+      this.setState({ activeSlide: index-1 });
+    }
 
   },
 
   render() {
 
     const {
-      projectIndex,
-      baseGridWidth
+      activeSlide,
+      isListView
+    } = this.state;
+
+    const {
+      id,
+      idx,
+      gallery,
+      baseGridWidth,
+      isMobile,
+      nextProject,
+      prevProject
     } = this.props;
 
-    const id      = workData[projectIndex]['id'];
-    const gallery = workData[projectIndex]['gallery'];
-    const view    = workData[projectIndex]['view'];
+    const view  = workData[idx]['view'];
     let width;
-    let height;
 
     if ( view === 'phone' ) {
-        width = baseGridWidth;
-        height = baseGridWidth/663*1177;
+        width = isMobile ? baseGridWidth * 0.85 : baseGridWidth * 0.5;
     }
     if ( view === 'tablet' ) {
         width = baseGridWidth;
-        height = baseGridWidth/540*417;
     }
     if ( view === 'desktop' ) {
-        width = baseGridWidth;
-        height = baseGridWidth/540*417;
+        width = baseGridWidth * 1;
     }
 
-    console.log('view = '+view);
-
       return (
-        <div
-            className='component-gallery'
+        <div className='component-gallery'
+            onMouseDown={this.next}
+            onTouchStart={this.next}
             style={{
-              width: `${ width }rem`,
-              height: `${ height }rem`
+                width: `${ width }rem`,
             }}>
-          <ReactSwipe ref='carousel' className='swipe'>
+
+            <div className='gallery-counter'>
+                <div
+                    className='arrow arrow-prev'
+                    onMouseDown={this.prev}
+                    onTouchStart={this.prev}>
+                    &#10216;
+                </div>
+                <span className='gallery-counter-index'>{ activeSlide + 1 }</span>
+                <span className='gallery-counter-length'>{ gallery.length }</span>
+                <div
+                    className='arrow arrow-next'
+                    onMouseDown={this.next}
+                    onTouchStart={this.next}>
+                    &#10217;
+                </div>
+            </div>
+
+            <div className='gallery-carousel'
+                onClick={this.nextProject}
+                onTouchEnd={this.nextProject}>
             { gallery.map((filename, i) => {
 
-              const divStyle = {
-                background: 'url(/assets/development/' + id + '/' + filename + ') no-repeat center center',
-                backgroundSize: 'contain',
-                width: `${ width }rem`,
-                height: `${ height }rem`
-              };
+                const s1 = 40;
+                const d1 = 20;
 
-              return (
-                <div
-                  className={ `gallery-slide gallery-${ view }` }
-                  style={ divStyle }
-                  key={ i }>
-                </div>
-              );
-            })}
-          </ReactSwipe>
+                const defaultSlideStyle = {
+                    o: spring( 50, [s1, d1])
+                };
 
-          <div
-            ref='arrowPrev'
-            className='arrow arrow-prev'
-            onMouseDown={this.prev}
-            onTouchStart={this.prev}>
+                const SlideStyle = activeSlide === i ? {
+                  o: spring(100, [s1, d1])
+                } : {
+                  o: spring(0, [s1, d1])
+                };
 
-            <ButtonComponent
-              text={ 'next' }
-              width={ 4 }
-              height={ 2 }
-              keycode={ 37 }
-              isHeading={ false } />
-
-          </div>
-
-          <div
-            ref='arrowNext'
-            className='arrow arrow-next'
-            onMouseDown={this.next}
-            onTouchStart={this.next}>
-
-            <ButtonComponent
-              text={ 'prev' }
-              width={ 4 }
-              height={ 2 }
-              keycode={ 39 }
-              isHeading={ false } />
-
-          </div>
+                return (
+                <Motion
+                    key={ `${i}-${id}` }
+                    defaultStyle={ defaultSlideStyle }
+                    style={ SlideStyle }>
+                    {({o}) => {
+                    return (
+                        <div
+                        className={ `gallery-slide` }
+                        style={{
+                            opacity: `${ o/100 }`,
+                        }}>
+                        <img src={ `/assets/development/${id}/${filename}` } />
+                        </div>
+                    );
+                    }}
+                </Motion>
+                );
+                })}
+            </div>
 
         </div>
       );

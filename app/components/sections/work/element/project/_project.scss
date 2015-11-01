@@ -9,7 +9,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        color: $white;
+        color: $text;
         content: attr(data-hover);
         -webkit-transition: max-width 1s;
         -moz-transition: max-width 1s;
@@ -18,14 +18,49 @@
 }
 
 .component-project {
-    color: $white;
+    color: $text;
+    margin-bottom: 3rem;
+    display: inline-block;
 
     .close-button {
         display: inline-block;
         float: right;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     .gallery-slide {
 
+    }
+
+    .project-detail {
+
+        line-height: 1;
+
+        h4, li {
+            display: inline-block;
+        }
+        h4 {
+            margin-bottom: 0.25rem;
+            padding-bottom: 0.25rem;
+        }
+        li {
+            margin-left: 0.25rem;
+            &:first-child {
+            }
+            &:before {
+                content: '/';
+                padding-right: 0.25rem;
+                color: $secondary-color;
+            }
+        }
+        li:nth-child(2) {
+            &:before {
+                content: '';
+                display: none;
+            }
+       }
     }
 }

@@ -21,81 +21,123 @@
 
 // F O N T  F A M I L Y
 body {
-    font-family: 'Source Sans Pro', 'Helvetica' sans-serif;
+    font-family: 'Karla', 'Source Sans Pro', 'Helvetica' sans-serif;
     font-weight: 400;
-    font-size: 15px
+    font-size: 18px
 }
 
 p, span, h1, h2, h3, h4, h5, h6 {
-    color: $white;
+    color: $text;
 }
 
 a {
-    color: $white;
+    color: $text;
 
     &:hover {
-        color: $cyan;
+        color: $color;
     }
 }
 
 h1, h2, h3, h5, h6 {
-    font-size: 2em;
-    font-weight: 400;
     margin: 0;
-    line-height: 1.333;
-    letter-spacing: 1px;
+}
+
+p, li, .contact-link {
+    line-height: 1.5;
+    font-size: 0.75rem;
+}
+
+.project-item a {
+    font-size: 0.6rem;
+}
+
+.list li {
+        font-size: 0.75rem;
+}
+
+
+label {
+    font-size: 0.75rem;
+    line-height: 0;
+    font-weight: 700;
 }
 
 p {
-    line-height: 1.5;
-    font-size: 0.8em;
-    margin: 1em 0;
+    margin: 0 0 1rem;
 }
 
-
-h2, h3, h4 {
+h1, h2, h3, h4 {
     text-transform: uppercase;
-    font-weight: 700;
     font-style: normal;
-    letter-spacing: 2px;
+    line-height: 1.333;
+    letter-spacing: 0.05rem;
 }
 
-h2 {
-    font-size: 2em;
-    padding-bottom: 0.25em;
-    color: $white;
-    letter-spacing: 0px;
+h1 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: $text;
+    border-bottom: 1px solid $color;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
     line-height: 1;
-    border: none;
-    font-family: 'Expletus Sans', 'Source Sans Pro', 'Helvetica', sans-serif;
 }
 
 h3 {
-    font-size: 1em;
-    padding-bottom: 1em;
-    margin-bottom: 1em;
+    font-size: 0.9rem;
+    font-weight: 400;
 }
 
- h4 {
-    border-color: $grey;
+h4 {
+    color: $secondary-color;
+    border-color: $secondary-color;
     letter-spacing: 1px;
-    font-size: 1em;
-    padding-bottom: 0.75em;
-    margin-bottom: 0.75em;
-    border-bottom: 1px dotted $white;
+    font-size: 0.75rem;
+    line-height: 1em;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px dotted $text;
+
+    &.work-title {
+        font-size: 1.2rem;
+        font-weight: 400;
+        letter-spacing: 0;
+
+        span {
+            color: $secondary-color;
+            text-transform: capitalize;
+        }
+
+        .thumbnails-button {
+            font-weight: 400;
+            text-transform: uppercase;
+            float: right;
+            color: $text;
+            font-size: 0.75rem;
+            transition: 200ms color $curve;
+            letter-spacing: 1px;
+            padding-left: 0.5rem;
+
+            &:hover {
+                color: $color;
+                cursor: pointer;
+            }
+        }
+    }
 }
 
-.text-button {
-    font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
-    font-size: 0.75em;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-style: normal;
-    letter-spacing: 1px;
+.project-detail h4 {
+    border-bottom: 0px;
 }
 
-.menu-button {
-    font-family: 'Expletus Sans', 'Source Sans Pro', 'Helvetica', sans-serif;
+h5 {
+    font-size: 1.75rem;
+    padding-bottom: 0.25rem;
+    color: $text;
+    opacity: 0.4;
+    letter-spacing: 0px;
+    line-height: 1;
+    border: none;
 }
 
 // F O N T  S I Z E

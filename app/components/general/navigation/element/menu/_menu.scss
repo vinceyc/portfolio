@@ -1,8 +1,12 @@
 .component-menu {
 
-    display: block;
-    color: $white;
-    margin-bottom: 2em;
+    display: inline-block;
+    float: left;
+    color: $text;
     position: relative;
+    width: 100%;
+    line-height: 0;
+
+    @import './../menuitem/_menuitem.scss';
 
 }

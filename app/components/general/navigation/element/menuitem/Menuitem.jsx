@@ -13,7 +13,8 @@ const MenuitemComponent = React.createClass({
     section: React.PropTypes.string,
     idx: React.PropTypes.number,
     baseGridWidth: React.PropTypes.number,
-    data: React.PropTypes.object
+    data: React.PropTypes.object,
+    isMobile: React.PropTypes.bool,
 
   },
 
@@ -22,48 +23,42 @@ const MenuitemComponent = React.createClass({
     const {
       changeSection,
       section,
-      baseGridWidth,
       idx,
-      data
+      baseGridWidth,
+      data,
+      isMobile
     } = this.props;
 
-    const endStyle = section === 'home' ?
-      {
-          top: spring( 45*idx, [ 40 * ( 1 + idx ), 20 ]),
-          left: spring( -(baseGridWidth)*idx, [ 40 * ( 1 + idx ), 20 ]),
-          opacity: spring( 1, [ 20 * ( 1 + idx ), 20 ] )
-      } :
-      {
-          top: spring( 0, [ 40 * ( 1 + idx ), 20 ]),
-          left: spring( 0, [ 40 * ( 1 + idx ), 20 ]),
-          opacity: spring( 0.9, [ 20 * ( 1 + idx ), 20 ] )
-      };
+    const endStyle =
+    {
+        top: spring( 0, [ 100 * ( 3 - idx ), 20 ]),
+        left: spring( baseGridWidth * 0.5 * idx, [ 100 * ( 3 - idx ), 20 ]),
+        opacity: spring( 1, [ 20 * ( 3 - idx ), 20 ] )
+    };
 
     return (
       <Motion
         defaultStyle={{top: 0, left: 0, opacity: 0}}
         style={ endStyle }>
           {values =>
-            <h2 className='menu-items'
+            <h3 className='menu-items'
               ref={ data['ref'] }
               id={ 'menu-'+ data['ref'] }
               onClick={ changeSection }
               onTouchStart={ changeSection }
               style={{
                   opacity: values.opacity,
-                  WebkitTransform: `translate3d( ${ values.left }rem, ${ values.top }px, 0 )`,
-                  transform: `translate3d( ${ values.left }rem, ${ values.top }px, 0 )`,
+                  WebkitTransform: `translate3d( ${ values.left }rem, ${ values.top }rem, 0 )`,
+                  transform: `translate3d( ${ values.left }rem, ${ values.top }rem, 0 )`,
               }}>
 
                 <ButtonComponent
                   text={ data['text'] }
                   className={ section === data['ref']  ? 'pressed' : ''}
-                  width={ baseGridWidth*2/3 }
-                  height={ 2.5 }
-                  keycode={ data['keycode'] }
-                  isHeading={ true } />
+                  height={ 0.75 }
+                  keycode={ data['keycode'] }/>
 
-            </h2>
+            </h3>
           }
       </Motion>
     );

@@ -18,7 +18,6 @@ const skillsData = [
             'Bootstrap',
             'React.js',
             'Vue.js',
-            'Phaser.js'
         ]
     },
     {
@@ -38,13 +37,22 @@ const skillsData = [
         ]
     },
     {
-        'type' : 'design software',
+        'type' : 'Wireframing',
         'list' : [
             'Photoshop',
             'InDesign',
             'Illustrator',
             'Balsamiq',
             'Omnigraffle'
+        ]
+    },
+     {
+        'type' : 'Learning...',
+        'list' : [
+            'Node.js',
+            'React Native',
+            'ES6',
+            'Three.js'
         ]
     }
 ];

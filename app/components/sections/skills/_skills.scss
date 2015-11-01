@@ -1,12 +1,14 @@
+// S K I L L S
 .component-skills {
 
-// S K I L L S
 
-.thumbnail-cell {
-    display: inline-block;
-    min-height: 210px;
-}
+    .skills-gallery {
 
-@import 'element/list/_list.scss';
+    }
+    .skills-cell {
+        display: inline-block;
+    }
+
+    @import 'element/list/_list.scss';
 
 }

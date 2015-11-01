@@ -1,31 +1,112 @@
-.component-gallery {
-    margin: 0 auto;
+.component-thumbnails {
+    height: 100%;
+    float: left;
     position: relative;
+
+    &.project-view {
+    }
+
+    &::-webkit-scrollbar {
+        width: 0.5rem;
+        background: $backgroundGradient;
+        border-radius:10px;
+    }
+
+    &::-webkit-scrollbar-thumb{
+        background: $grey;
+        border-radius:10px;
+    }
+}
+::-webkit-scrollbar {
+    width: 0.5rem;
 }
 
-.thumbnail-gallery,
-.skills-gallery {
+.gallery-counter {
+    position: relative;
+    z-index: 5;
+    width: 1rem;
+    height: 1rem;
+    margin: 0 auto 1.5rem;
+
+    .gallery-counter-index,
+    .gallery-counter-length {
+        position: absolute;
+        font-size: 1rem;
+        line-height: 0;
+    }
+    .gallery-counter-index {
+        top: 10%;
+        left: -25%;
+    }
+    .gallery-counter-length {
+        bottom: -10%;
+        right: -30%;
+    }
+
+    .arrow {
+        position: absolute;
+        line-height: 1rem;
+        height: 1rem;
+        width: 1.5rem;
+        font-size: 2rem;
+        text-align: center;
+        opacity: 0.9;
+
+        &:hover {
+            color: $secondary-color;
+            cursor: pointer;
+        }
+    }
+
+    .arrow-prev {
+        left: -2rem;
+    }
+    .arrow-next {
+        right: -2rem;
+    }
+
+    &:before {
+        content: 'line';
+        color: transparent;
+        height: 1px;
+        background-color: $secondary-color;
+        position: absolute;
+        width: 2.6rem;
+        top: 50%;
+        left: -80%;
+        transform: rotate(-45deg);
+    }
+}
+
+.gallery-carousel {
+    position: relative;
+    height: 100%;
     width: 100%;
-    display: block;
-}
-
-.swipe {
-    border: 1px solid #777;
-    box-sizing: border-box;
+    margin: 0 auto;
 }
 
 .gallery-slide {
-
-}
-
-.arrow {
     position: absolute;
-    transform: translateY(-50%);
-    top: 50%;
+    height: auto;
+    width: 100%;
+    opacity: 1;
+    text-align: center;
+    top: 0;
+
+    &:first-child {
+        position: relative;
+    }
+
+    img {
+        position: relative;
+        max-width: 100%;
+        margin: 0 auto;
+    }
 }
-.arrow-prev {
-    left: -3em;
-}
-.arrow-next {
-    right: -3em;
+
+.component-gallery {
+    width: 100%;
+    display: block;
+    position: relative;
+    margin: 1rem auto;
 }
