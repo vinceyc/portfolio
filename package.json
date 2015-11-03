@@ -60,6 +60,7 @@
     "lodash": "^3.10.1",
     "minimist": "^1.2.0",
     "react-motion": "^0.2.7",
-    "readable-stream": "^2.0.2"
+    "readable-stream": "^2.0.2",
+    "three": "^0.73.0"
   }
 }

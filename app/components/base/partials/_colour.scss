@@ -6,10 +6,12 @@ $grey: rgb(202,200,195);
 $dark-purple: rgb(35,25,45);
 
 $white: rgb(252,250,245);
-$text: $dark-purple;
+$text: $white;
 
-$secondary-color: #395CAA;
-$blue: hsl(221, 50%, 45%);
+$blue: hsl(221, 50%, 50%);
+$blue: hsl(221, 90%, 60%);
+
+$secondary-color: $blue;
 //blue
 $color: rgb(57,92,170);
 //red
@@ -19,8 +21,8 @@ $elementGradient: linear-gradient( 135deg, hsla(0, 0%, 80%, 1), hsla(0, 0%, 100%
 $elementGradientreverse: linear-gradient( 135deg, hsla(0, 0%, 100%, 1), hsla(0, 0%, 25%, 1) );
 $backgroundBorderGradient: linear-gradient( 135deg, hsla(0, 0%, 20%, 1), hsla(0, 0%, 4%, 1) );
 $letterGradient: linear-gradient( 135deg, hsla(0, 0%, 90%, 1), hsla(0, 0%, 100%, 0) );
-$backgroundGradient: linear-gradient( 135deg, hsla(0, 0%, 100%, 1), hsla(0, 0%, 80%, 1) );
-$workThumbnailGradient: linear-gradient( 135deg, hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0) );
+$backgroundGradient: linear-gradient( 135deg, hsla(0, 0%, 10%, 1), hsla(0, 0%, 4%, 1) );
+$workThumbnailGradient: linear-gradient( 135deg, hsla(0, 0%, 10%, 0.8), hsla(0, 0%, 0%, 0) );
 $whiteGradient: linear-gradient( 45deg, hsla(0, 0%, 0%, 1), hsla(0, 0%, 5%, 1) );
 
 // V A R I A B L E S

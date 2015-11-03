@@ -47,7 +47,7 @@ const ProjectComponent = React.createClass({
     const d1 = 20;
 
     const defaultProjectStyle = {
-        o: spring( 50, [s1, d1])
+        o: spring( 0, [s1, d1])
     };
 
     const ProjectStyle = {
@@ -65,12 +65,10 @@ const ProjectComponent = React.createClass({
                     opacity: `${ o/100 }`,
                 }}>
 
-                    <h4 className='work-title'>{ workData[idx]['title'] }
-                        <span className='thumbnails-button'
-                        onClick={ exitProject }
-                        onTouchStart={ exitProject }>
-                            all projects
-                        </span>
+                    <h4 className='work-title'>
+
+                        { workData[idx]['title'] }
+
                     </h4>
 
                     { renderedLink }
@@ -86,6 +84,8 @@ const ProjectComponent = React.createClass({
                         <h4>Description</h4>
                         <li>{ workData[idx]['description'] }</li>
                     </ul>
+
+
 
                 </div>
             );

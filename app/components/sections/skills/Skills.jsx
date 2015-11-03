@@ -67,7 +67,7 @@ const SkillsComponent = React.createClass({
               const cellStyle = {
                 width: `${ baseGridWidth - 1 }rem`,
                 marginRight: `1rem`,
-                height: `${ baseGridWidth + 1 }rem`,
+                height: `${ baseGridWidth + 3 }rem`,
               };
               const stiffness = s0 + i * 15;
               const damping = d0 + i * 3;

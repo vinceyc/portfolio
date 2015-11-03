@@ -25,6 +25,10 @@
         <link href='https://fonts.googleapis.com/css?family=Karla:400,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="styles/css/style.css" css="">
 
+        <!-- favicons  -->
+        <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+        <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
     </head>
 
     <body>
@@ -42,134 +46,9 @@ EOHTML;
 
     ?>
 
-    <script src="three.min.js"></script>
-        <script type="x-shader/x-vertex" id="vertexshader">
-
-            attribute float size;
-            attribute vec3 customColor;
-            varying vec3 vColor;
-
-            void main() {
-
-                vColor = customColor;
-                vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
-                gl_PointSize = size * ( 300.0 / length( mvPosition.xyz ) );
-                gl_Position = projectionMatrix * mvPosition;
-
-            }
-
-        </script>
-
-        <script type="x-shader/x-fragment" id="fragmentshader">
-
-            uniform vec3 color;
-            uniform sampler2D texture;
-            varying vec3 vColor;
-
-            void main() {
-
-                gl_FragColor = vec4( color * vColor, 1.0 );
-                gl_FragColor = gl_FragColor * texture2D( texture, gl_PointCoord );
-                if ( gl_FragColor.a < ALPHATEST ) discard;
-
-            }
-
-        </script>
-
-        <script>
-            var renderer, scene, camera;
-
-            var particles, uniforms;
-
-            var PARTICLE_SIZE = 10;
-
-            init();
-            animate();
-
-            function init() {
-
-                container = document.getElementById( 'container' );
-                scene = new THREE.Scene();
-                camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 10000 );
-                camera.position.z = 350;
-
-
-                var geometry1 = new THREE.BoxGeometry( 270, 270, 270, 30, 30, 30 );
-                var vertices = geometry1.vertices;
-                var positions = new Float32Array( vertices.length * 3 );
-                var colors = new Float32Array( vertices.length * 3 );
-                var sizes = new Float32Array( vertices.length );
-                var vertex;
-                var color = new THREE.Color();
-
-                for ( var i = 0, l = vertices.length; i < l; i ++ ) {
-
-                    vertex = vertices[ i ];
-                    vertex.toArray( positions, i * 3 );
-                    color.setHSL( 0, 0, 0.75 + 0.25 * ( i / l ))
-                    color.toArray( colors, i * 3 );
-                    sizes[ i ] = PARTICLE_SIZE;
-
-                }
-
-                var geometry = new THREE.BufferGeometry();
-                geometry.addAttribute( 'position', new THREE.BufferAttribute( positions, 3 ) );
-                geometry.addAttribute( 'customColor', new THREE.BufferAttribute( colors, 3 ) );
-                geometry.addAttribute( 'size', new THREE.BufferAttribute( sizes, 1 ) );
-
-                //
-
-                var material = new THREE.ShaderMaterial( {
-
-                    uniforms: {
-                        color:   { type: "c", value: new THREE.Color( 0xffffff ) },
-                        texture: { type: "t", value: THREE.ImageUtils.loadTexture( "images/disc.png" ) }
-                    },
-                    vertexShader: document.getElementById( 'vertexshader' ).textContent,
-                    fragmentShader: document.getElementById( 'fragmentshader' ).textContent,
-                    alphaTest: 0.9,
-
-                } );
-
-                particles = new THREE.Points( geometry, material );
-                scene.add( particles );
-
-                renderer = new THREE.WebGLRenderer({ alpha: true });
-                renderer.setPixelRatio( window.devicePixelRatio );
-                renderer.setSize( window.innerWidth, window.innerHeight );
-                container.appendChild( renderer.domElement );
-
-                window.addEventListener( 'resize', onWindowResize, false );
-
-            }
-
-            function onWindowResize() {
-
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize( window.innerWidth, window.innerHeight );
-
-            }
-
-            function animate() {
-
-                requestAnimationFrame( animate );
-                render();
-
-            }
-
-            function render() {
-
-                particles.rotation.z += 0.001;
-                particles.rotation.x -= 0.0005;
-                particles.rotation.y -= 0.00025;
-
-                var geometry = particles.geometry;
-                var attributes = geometry.attributes;
-                renderer.render( scene, camera );
-
-            }
-        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r73/three.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="background.js"></script>
 
     </body>
 </html>

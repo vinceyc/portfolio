@@ -37,13 +37,12 @@ body {
 // T H R E E . J S
 #container {
     position: absolute;
-    opacity: 0;
-    transition: 4s opacity $curve;
+    // opacity: 0;
+    transition: 2s opacity $curve;
 }
 
 .wrapper {
     margin: 2rem 0 0;
-    min-height: 90%;
 }
 
 .header {

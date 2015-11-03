@@ -25,7 +25,7 @@ const HomeComponent = React.createClass({
 
         return {
             mouse: [0, 0],
-            firstConfig: [10,10],
+            firstConfig: [20,10],
             slider: {dragged: null, num: 0},
             lastPressed: [0, 0],
         };
@@ -51,7 +51,7 @@ const HomeComponent = React.createClass({
             baseGridWidth
         } = this.props;
 
-        const factor = 4;
+        const factor = 3;
         const width = (baseGridWidth)/factor;
         const height = (baseGridWidth*4/3)/factor;
 
@@ -67,7 +67,7 @@ const HomeComponent = React.createClass({
                     const damping = d0;
 
                     const defaultLetterStyle = {
-                        x: spring(i * 100 * Math.random() * (Math.round(Math.random()) * 2 - 1), [stiffness*10, damping*4]),
+                        x: spring(i * 10 * Math.random() * (Math.round(Math.random()) * 2 - 1), [stiffness, damping]),
                         y: spring(i * 20 * Math.random() * (Math.round(Math.random()) * 2 - 1), [stiffness, damping]),
                         o: spring(0, [stiffness*10, damping*4]),
                         lightness: spring(0),
@@ -77,7 +77,7 @@ const HomeComponent = React.createClass({
                         x: spring(0, [stiffness*10, damping*4]),
                         y: spring(0, [stiffness, damping]),
                         o: spring(1, [stiffness*10, damping*4]),
-                        lightness: spring(90 - (letterArray.length - i)*2, [stiffness, damping]),
+                        lightness: spring(100 - (letterArray.length - i), [stiffness, damping]),
                     }
 
                     return (

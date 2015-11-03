@@ -4,7 +4,6 @@ import {Motion, spring} from 'react-motion';
 
 // C O M P O N E N T S
 import FormComponent from './element/form/Form.jsx';
-import IconComponent from './../../general/icon/Icon.jsx';
 
 let contactItems;
 
@@ -33,7 +32,7 @@ const ContactComponent = React.createClass({
     } = this.props;
 
     let textColumnWidth;
-    textColumnWidth = columns < 4 ? 1 : 2;
+    textColumnWidth = columns < 4 ? 2 : 4;
     textColumnWidth = columns <= 2 ? 2 : textColumnWidth;
 
     let formColumnWidth = columns - textColumnWidth;
@@ -88,58 +87,15 @@ const ContactComponent = React.createClass({
                 This website was created using <a href='https://facebook.github.io/react/' target='_blank'>React.js</a>, <a href='https://github.com/chenglou/react-motion' target='_blank'>React Motion</a> and just a bit of <a href='http://threejs.org/' target='_blank'>Three.js</a>
             </p>
 
+            <p>
+                Background inspired by <a href='http://codepen.io/enesser/pen/jdenE' target='_blank'>Eric J Nesser</a>.
+            </p>
+
             <a className='contact-link' href='mailto:vince.ys.chan@gmail.com'>Email</a>
 
             <a className='contact-link' href='https://ca.linkedin.com/pub/vincent-chan/43/276/5ab'>LinkedIn</a>
 
             <a className='contact-link' href="vincent_chan_resume.pdf" target="_blank">Résumé</a>
-
-            </div>
-          }
-        </Motion>
-         <Motion defaultStyle={ formDefaultStyle } style={ formStyle }>
-          {({x, y, o}) =>
-            <div
-              className='contact-form'
-              style={{
-                width: `${ baseGridWidth * formColumnWidth - 1 }rem`,
-                marginRight: `${ 1 }rem`,
-                opacity: o/100,
-                transform: `translate3d( 0, ${ y }px, 0)`,
-                WebkitTransform: `translate3d( 0, ${ y }px, 0)`,
-              }}>
-
-              <h4>Drop me a line</h4>
-
-              <form method="post" action="contact.php">
-
-              <FormComponent
-                  type={ 'name' }
-                  width={ baseGridWidth * formColumnWidth - 1 }
-                  height={ 1.5 }
-                  toggleFocusState={ toggleFocusState }/>
-
-                <FormComponent
-                  type={ 'email' }
-                  width={ baseGridWidth * formColumnWidth - 1 }
-                  height={ 1.5 }
-                  toggleFocusState={ toggleFocusState }/>
-
-                <FormComponent
-                  type={ 'message' }
-                  width={ baseGridWidth * formColumnWidth - 1 }
-                  height={ 6 }
-                  toggleFocusState={ toggleFocusState }/>
-
-                <FormComponent
-                  type={ 'submit' }
-                  width={ baseGridWidth * formColumnWidth - 1 }
-                  height={ 1.5 }
-                  toggleFocusState={ toggleFocusState }/>
-
-              </form>
-
-            <p id="status" className="status"></p>
 
             </div>
           }

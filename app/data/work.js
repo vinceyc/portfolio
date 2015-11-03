@@ -83,7 +83,7 @@ const workData = [
             '5.jpg'
         ],
         'description' : 'Using various javascript plugins in harmony, a dynamic homepage was made to showcase the different flavours the product. Wordpress was used for content management.',
-        'tech' : ['Javascript', 'JQuery', 'Wordpress', 'HTML5', 'CSS'],
+        'tech' : ['JQuery', 'Wordpress', 'HTML5', 'CSS'],
         'type' : 'Wordpress Website',
         'view' : 'desktop'
     },
@@ -98,7 +98,7 @@ const workData = [
             '5.jpg'
         ],
         'description' : 'A website for an art school showcasing different teaching programs and galleries of student artwork. Made as a multi-state single-page site using Ajax and GSAP for animating between states.',
-        'tech' : ['HTML5', 'CSS', 'JQuery', 'Javascript', 'GSAP'],
+        'tech' : ['HTML5', 'CSS', 'JQuery', 'GSAP'],
         'type' : 'Website',
         'link' : 'http://www.littlebigartschool.com/',
         'view' : 'desktop'

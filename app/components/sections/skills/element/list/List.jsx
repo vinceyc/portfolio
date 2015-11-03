@@ -30,13 +30,13 @@ const ListComponent = React.createClass({
         const defaultValue = {
           top: spring(4000),
           opacity: spring(0),
-          lightness: spring(100)
+          lightness: spring(20)
         };
 
         const endValue = {
           top: spring(1+2*(i+1), [80+(i*20), 10]),
           opacity: spring(100, [80+(i*20), 10]),
-          lightness: spring(0, [30+(i*2), 80]),
+          lightness: spring(100, [30+(i*2), 80]),
         };
 
         return (

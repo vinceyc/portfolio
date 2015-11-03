@@ -63,6 +63,7 @@
 
     cursor: pointer;
     background: $workThumbnailGradient;
+    transition: background 0.4s ease-out;
 
     .thumbnail-link {
         width: 90%;

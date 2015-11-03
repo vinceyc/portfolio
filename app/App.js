@@ -9,7 +9,6 @@ React.initializeTouchEvents(true);
 
 // C O M P O N E N T S
 import NavComponent from './components/general/navigation/Navigation.jsx';
-// import PondRipples from './components/general/backgrounds/PondRipples.jsx';
 import SectionComponent from './components/sections/Section.jsx';
 
 const Main = React.createClass({
@@ -28,19 +27,16 @@ const Main = React.createClass({
     componentWillMount() {
 
         this.handleResize();
-        document.getElementById('container').style.opacity = 0.5;
 
     },
 
     componentDidMount() {
 
+        this.handleResize();
+        document.getElementById('container').style.opacity = 1;
         window.addEventListener('keydown', this.handleOnKeyDown);
         window.addEventListener('keyup', this.handleOnKeyUp);
         window.addEventListener('resize', this.handleResize);
-
-    },
-
-    handleOnKeyUp(e) {
 
     },
 
@@ -91,7 +87,6 @@ const Main = React.createClass({
         // console.log("[window width: "+width+" | window real width: "+realWidth+" | DPI: "+windowDPR+" | # columns: "+this.state.columns+" | base width: "+this.state.baseGridWidth+"em");
 
         if ( realWidth >= 1440 * windowDPR ) {
-            console.log('1');
             this.setState({
                 baseGridWidth: 12,
                 columns: 6,
@@ -100,7 +95,6 @@ const Main = React.createClass({
 
         }
         else if ( realWidth <= 1440 * windowDPR && realWidth >= 1281 * windowDPR ) {
-            console.log('2');
             this.setState({
                 baseGridWidth: 11,
                 columns: 6,
@@ -108,7 +102,6 @@ const Main = React.createClass({
              });
         }
         else if ( realWidth <= 1280 * windowDPR && realWidth >= 1141 * windowDPR ) {
-            console.log('3');
             this.setState({
                 baseGridWidth: 9,
                 columns: 6,
@@ -116,7 +109,6 @@ const Main = React.createClass({
              });
         }
         else if ( realWidth <= 1140 * windowDPR && realWidth >= 961 * windowDPR ) {
-            console.log('4');
             this.setState({
                 baseGridWidth: 11,
                 columns: 4,
@@ -124,7 +116,6 @@ const Main = React.createClass({
              });
         }
         else if ( realWidth <= 960 * windowDPR && realWidth >= 861 * windowDPR ) {
-            console.log('5');
             this.setState({
                 baseGridWidth: 10,
                 columns: 4,
@@ -132,7 +123,6 @@ const Main = React.createClass({
              });
         }
          else if ( realWidth <= 860 * windowDPR && realWidth >= 775 * windowDPR ) {
-            console.log('6');
             this.setState({
                 baseGridWidth: 9,
                 columns: 4,
@@ -140,7 +130,6 @@ const Main = React.createClass({
              });
         }
         else if ( realWidth <= 774 * windowDPR && realWidth >= 661 * windowDPR ) {
-            console.log('7');
             this.setState({
                 baseGridWidth: 10,
                 columns: 3,
@@ -148,7 +137,6 @@ const Main = React.createClass({
              });
         }
         else if ( realWidth <= 660 * windowDPR) {
-            console.log('8');
             this.setState({
                 baseGridWidth: 10,
                 columns: 2,
@@ -184,8 +172,7 @@ const Main = React.createClass({
 
         return (
 
-            <div
-                id='wrapper'
+            <div id='wrapper'
                 className='wrapper'>
 
                 <NavComponent

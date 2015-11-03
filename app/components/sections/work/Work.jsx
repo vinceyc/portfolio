@@ -27,17 +27,9 @@ const WorkComponent = React.createClass({
 
     getInitialState() {
         return {
-            firstConfig: [60, 10],
+            firstConfig: [80, 25],
             idx: null
         };
-    },
-
-    componentDidMount() {
-
-        this.props.completeTransition();
-        window.addEventListener('keydown', this.handleOnKeyDown);
-        window.addEventListener('keyup', this.handleOnKeyUp);
-
     },
 
     handleOnKeyDown(e) {
@@ -120,6 +112,7 @@ const WorkComponent = React.createClass({
     const heightRatio = 1.25;
 
     if (idx !== null) {
+
       renderedProject =
        <ProjectComponent
         idx={ idx }
@@ -136,6 +129,7 @@ const WorkComponent = React.createClass({
         isMobile={ isMobile }
         nextProject={ this.nextProject }
         prevProject={ this.prevProject }
+        exitProject={ this.exitProject }
         baseGridWidth={ baseGridWidth * (columns - projectViewThumbnailsWidth) - 1 } />;
 
       renderedViewport =
@@ -161,13 +155,11 @@ const WorkComponent = React.createClass({
     const projectStyle = idx == null
     ? {
         w: spring( 0 , [s0, d0]),
-        x: spring( 0 , [s0, d0]),
-        y: spring( 12 , [s0, d0]),
+        y: spring( 0 , [s0, d0]),
         o: spring( 0 , [20, d0]),
       }
     : {
         w: spring( 100, [s0, d0]),
-        x: spring( 0, [s0, d0]),
         y: spring( 0, [s0, d0]),
         o: spring( 100 ),
       };
@@ -267,14 +259,14 @@ const WorkComponent = React.createClass({
         }
         </Motion>
         <Motion style={ projectStyle }>
-          {({w, x, y, o}) =>
+          {({w, y, o}) =>
             <div
               className='component-project'
               style={{
                 opacity: o/100,
                 width: `${ ((baseGridWidth * (columns - projectViewThumbnailsWidth)) - projectViewThumbnailsWidth*3) * w/100 }rem`,
-                transform: `translate3d(${x}rem, ${y}rem, 0)`,
-                WebkitTransform: `translate3d(${x}rem, ${y}rem, 0)`,
+                transform: `translate3d(0, ${y}rem, 0)`,
+                WebkitTransform: `translate3d(0, ${y}rem, 0)`,
                 marginLeft: `${ projectViewThumbnailsWidth }rem`,
               }}>
 

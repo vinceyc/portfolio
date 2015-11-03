@@ -19,7 +19,6 @@
 
 .component-project {
     color: $text;
-    margin-bottom: 3rem;
     display: inline-block;
 
     .close-button {
@@ -30,9 +29,42 @@
             cursor: pointer;
         }
     }
+    .project-nav {
+        height: 3rem;
+        line-height: 2.5rem;
+        position: absoute;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+    }
 
-    .gallery-slide {
+    .project-nav-container {
+        margin: 0 auto;
+        text-align: center;
+    }
 
+    .project-nav-next,
+    .project-nav-prev,
+    .project-nav-thumbs {
+        color: $text;
+        opacity: 0.9;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        display: inline=block;
+
+        &:hover {
+            color: $secondary-color;
+            cursor: pointer;
+        }
+    }
+
+    .project-nav-next {
+        float: right;
+        padding-right: 0.5rem;
+    }
+
+    .project-nav-prev {
+        float: left;
     }
 
     .project-detail {

@@ -26,6 +26,7 @@ const GalleryComponent = React.createClass({
         gallery: React.PropTypes.array,
         baseGridWidth: React.PropTypes.number,
         isMobile: React.PropTypes.bool,
+        exitProject: React.PropTypes.func,
         nextProject: React.PropTypes.func,
         prevProject: React.PropTypes.func,
 
@@ -34,13 +35,6 @@ const GalleryComponent = React.createClass({
   componentWillReceiveProps() {
 
     this.setState({ activeSlide: 0 });
-
-  },
-
-  componentDidMount() {
-
-    window.addEventListener('keydown', this.handleOnKeyDown);
-    window.addEventListener('keyup', this.handleOnKeyUp);
 
   },
 
@@ -102,6 +96,7 @@ const GalleryComponent = React.createClass({
       gallery,
       baseGridWidth,
       isMobile,
+      exitProject,
       nextProject,
       prevProject
     } = this.props;
@@ -110,7 +105,7 @@ const GalleryComponent = React.createClass({
     let width;
 
     if ( view === 'phone' ) {
-        width = isMobile ? baseGridWidth * 0.85 : baseGridWidth * 0.5;
+        width = isMobile ? baseGridWidth * 0.7 : baseGridWidth * 0.5;
     }
     if ( view === 'tablet' ) {
         width = baseGridWidth;
@@ -122,31 +117,25 @@ const GalleryComponent = React.createClass({
       return (
         <div className='component-gallery'
             onMouseDown={this.next}
-            onTouchStart={this.next}
             style={{
                 width: `${ width }rem`,
             }}>
 
             <div className='gallery-counter'>
-                <div
-                    className='arrow arrow-prev'
-                    onMouseDown={this.prev}
-                    onTouchStart={this.prev}>
+                <div className='arrow arrow-prev'
+                    onMouseDown={this.prev}>
                     &#10216;
                 </div>
                 <span className='gallery-counter-index'>{ activeSlide + 1 }</span>
                 <span className='gallery-counter-length'>{ gallery.length }</span>
-                <div
-                    className='arrow arrow-next'
-                    onMouseDown={this.next}
-                    onTouchStart={this.next}>
+                <div className='arrow arrow-next'
+                    onMouseDown={this.next}>
                     &#10217;
                 </div>
             </div>
 
             <div className='gallery-carousel'
-                onClick={this.nextProject}
-                onTouchEnd={this.nextProject}>
+                onClick={this.nextProject}>
             { gallery.map((filename, i) => {
 
                 const s1 = 40;
@@ -181,6 +170,23 @@ const GalleryComponent = React.createClass({
                 </Motion>
                 );
                 })}
+            </div>
+
+            <div className='project-nav'>
+                <div className='project-nav-container'>
+                    <span className='project-nav-prev'
+                        onMouseDown={ prevProject }>
+                        Previous Work
+                    </span>
+                    <span className='project-nav-thumbs'
+                        onMouseDown={ exitProject }>
+                        Thumbnails
+                    </span>
+                    <span className='project-nav-next'
+                        onMouseDown={ nextProject }>
+                        Next Work
+                    </span>
+                </div>
             </div>
 
         </div>
